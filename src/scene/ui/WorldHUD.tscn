@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/script/ui/WorldHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/VeraMono.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/script/ui/skillList.gd" type="Script" id=3]
 [ext_resource path="res://src/script/ui/partyList.gd" type="Script" id=4]
+[ext_resource path="res://src/script/ui/eventLog.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -11,7 +12,7 @@ size = 12
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
@@ -27,7 +28,14 @@ size = 12
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 12
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
 
 [node name="WorldHUD" type="Control" index="0"]
 
@@ -74,7 +82,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -170.0
+margin_left = -190.0
+margin_top = -171.0
 margin_right = -150.0
 margin_bottom = -150.0
 grow_horizontal = 0
@@ -165,7 +174,7 @@ fixed_icon_size = Vector2( 0, 0 )
 script = ExtResource( 4 )
 _sections_unfolded = [ "Anchor", "Columns", "Grow Direction", "Icon", "Margin", "Size Flags" ]
 
-[node name="Container" type="ItemList" parent="." index="3"]
+[node name="EventLog" type="ItemList" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 1.0
@@ -180,11 +189,13 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
 items = [  ]
 select_mode = 0
 allow_reselect = false
 icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Anchor", "Margin" ]
+script = ExtResource( 5 )
+_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
 
