@@ -4,8 +4,13 @@ export (PackedScene) var arrowType
 var arrows = []
 
 const SPEED = 400
+const TIME_HOUR_THRESHOLD = 10
+const TIME_SCALE = 100
 
 var camera
+
+var travelTimeAccumulator = 0
+var mainData
 
 # Location
 var currentLocation
@@ -16,6 +21,7 @@ func _ready():
 	# Initialization here
 	$Icon/AnimationPlayer.play("Bounce")
 	camera = get_tree().get_root().get_node("Main/Camera2D")
+	mainData = get_tree().get_root().get_node("Main").get_node("MainData")
 	
 func _process(delta):
 	if(currentTarget != null):
@@ -29,9 +35,15 @@ func _process(delta):
 			currentLocation = currentTarget
 			currentTarget = null
 			createArrows()
+			travelTimeAccumulator = 0
 		else:
 			position += direction.normalized() * distance
 			camera.position += direction.normalized() * distance
+			travelTimeAccumulator += delta * TIME_SCALE
+			print(travelTimeAccumulator)
+			if(travelTimeAccumulator > TIME_HOUR_THRESHOLD):
+				mainData.addTime(1)
+				travelTimeAccumulator -= TIME_HOUR_THRESHOLD
 	
 
 func createArrows():

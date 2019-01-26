@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 0, -2 ), Vector2( 0, 2 ) ]
 }
 
-[node name="PlayerIndicator" type="Node2D"]
+[node name="PlayerIndicator" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 arrowType = ExtResource( 2 )
