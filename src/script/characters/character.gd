@@ -62,6 +62,18 @@ class character:
 		else:
 			desiredResource[resource] = quantity
 	
+	# Checks to see if the character is available at the current time.
+	# Returns true if the character has no conflict in the next unit
+	# of time and false otherwise.
+	func isAvailable(time):
+		var ob = Obligation.obligation.new(time, time + 1)
+		var conflict = {}
+		schedule.addConflicts(conflict, ob)
+		if conflict.size() > 0:
+			return false
+		return true
+		
+	# Adds a skill to a character's skill list
 	func learnSkill(skill):
 		skills.append(skill)
 		
