@@ -17,21 +17,24 @@ func listParty(p):
 
 func _ready():
 	# to do
-	var skone = Skill.skill.new("sk1", "desc1", 112)
-	var sktwo = Skill.skill.new("sk2", "desc2", 382)
-	var a = Character.character.new("a", true, [skone, sktwo], 150)
-	var b = Character.character.new("b", false, [skone, sktwo], 250)
-	var c = Character.character.new("c", false, [skone, sktwo], 350)
-	var d = Character.character.new("d", false, [skone, sktwo], 450)
+	var skone = Skill.skill.new("sk1", "desc1", "things", 112)
+	var sktwo = Skill.skill.new("sk2", "desc2", "things", 382)
+	var a = Character.character.new("a", [skone, sktwo], 0, true)
+	var b = Character.character.new("b", [skone, sktwo], 250)
+	var c = Character.character.new("c", [skone, sktwo], 350)
+	var d = Character.character.new("d", [skone, sktwo], 450)
 	
 	var p = Party.party.new([a, b, c, d])
 	
-	var e = Character.character.new("e", false, [skone, sktwo], 450)
-	var f = Character.character.new("f", false, [skone, sktwo], 450)
+	var e = Character.character.new("e", [skone, sktwo], 450)
+	var f = Character.character.new("f", [skone, sktwo], 450)
 			
 	
 	
 	print("******************TEST*******************")
+	for skillName in p.skillList.keys():
+		print(skillName + ": " + p.skillList[skillName].description + " - " + p.skillList[skillName].resource)
+	
 	listParty(p)
 	p.setInactive(a)
 	listParty(p)
@@ -45,5 +48,11 @@ func _ready():
 	p.setActive(f)
 	listParty(p)
 	p.setActive(b)
+	listParty(p)
+	print(p.skillTotals())
+	
+	print("##################")
+	var t = p.newCharacter("test", ["Leadership", "Forestry"])
+	p.setActive(t)
 	listParty(p)
 	print(p.skillTotals())

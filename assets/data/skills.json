@@ -1,6 +1,74 @@
 {
-"leadership": {
-    "name": "leadership",
-    "description": "The ability to pull your family through the toughest of times."
-}
+    "leadership":
+    {
+        "name": "Leadership",
+        "description": "The ability to pull your family through the toughest of times.",
+        "resource": ""
+    },
+    "forestry":
+    {
+        "name": "Forestry",
+        "description": "Gather wood from trees.",
+        "resource": "Wood"
+    },
+    "hunting":
+    {
+        "name": "Hunting",
+        "description": "Hunt things for food.",
+        "resource": "Meat"
+    },
+    "farming":
+    {
+        "name": "Farming",
+        "description": "Growing things for food.",
+        "resource": "Grains"
+    },
+    "bartering":
+    {
+        "name": "Bartering",
+        "description": "Bargain with people for profit.",
+        "resource": "Gold"
+    },
+    "mining":
+    {
+        "name": "Mining",
+        "description": "Extract ores from rocks.",
+        "resource": "Ore"
+    },
+    "fighting":
+    {
+        "name": "Fighting",
+        "description": "The ability to fight off tough opponents.",
+        "resource": "Monster Trophies"
+    },
+    "magic":
+    {
+        "name": "Magic",
+        "description": "Magical abilities.",
+        "resource": "Magical Artifacts"
+    },
+    "stealth":
+    {
+        "name": "Stealth",
+        "description": "Slip past people unseen and unheard.",
+        "resource": ""
+    },
+    "animals":
+    {
+        "name": "Animals",
+        "description": "Knowledge of animals and how to handle and care for them.",
+        "resource": ""
+    },
+    "carpentry":
+    {
+        "name": "Carpentry",
+        "description": "Making things with wood.",
+        "resource": "Wood Products"
+    },
+    "pathfinding":
+    {
+        "name": "Pathfinding",
+        "description": "Finding new routes through the wilderness",
+        "resource": ""
+    }
 }

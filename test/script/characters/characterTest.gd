@@ -3,11 +3,18 @@ extends Node
 const Character = preload("res://src/script/characters/character.gd")
 const Skill = preload("res://src/script/characters/skill.gd")
 
+const SkLoader = preload("res://src/script/characters/skillLoader.gd")
+
 func _ready():
 	
-	var skone = Skill.skill.new("sk1", "desc1", 12)
-	var sktwo = Skill.skill.new("sk2", "desc2", 382)
-	var c = Character.character.new("one", true, [skone, sktwo], 150)
+	var loader = SkLoader.skillLoader.new()
+	loader.loadSkills()
+	
+	var forestry = loader.newSkill("Forestry")
+	var hunting = loader.newSkill("Hunting")
+	forestry.xp = 200
+	
+	var c = Character.character.new("a", [forestry, hunting], 150, true)
 	
 	
 	print("******************TEST*******************")
@@ -18,4 +25,10 @@ func _ready():
 		print(skill.name + " -- " + skill.description + ", lv: " + str(skill.level()) + ", XP: " + str(skill.xp))
 	print("Bond level: " + str(c.bondLevel()) + ", XP: " + str(c.bondXp))
 	
-	
+	print("----------------------------------------")
+	print("Set desired resource")
+	var n = 0
+	while n < 20:
+		c.setResource(5, loader.skills, randi()%10+1)
+		print("Resource: " + str(c.desiredResource))
+		n += 1
