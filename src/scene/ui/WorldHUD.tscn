@@ -11,7 +11,7 @@ size = 12
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
@@ -27,9 +27,9 @@ size = 12
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="WorldHUD" type="Control"]
+[node name="WorldHUD" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -44,56 +44,7 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse", "Visibility" ]
 
-[node name="skillList" type="ItemList" parent="." index="0"]
-
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -150.0
-margin_top = -100.0
-grow_horizontal = 0
-grow_vertical = 0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-script = ExtResource( 3 )
-_sections_unfolded = [ "Grow Direction", "Margin", "Rect", "custom_fonts" ]
-
-[node name="partyList" type="ItemList" parent="." index="1"]
-
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-margin_left = -150.0
-margin_bottom = 200.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-script = ExtResource( 4 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
-
-[node name="currTime" type="Label" parent="." index="2"]
+[node name="currTime" type="Label" parent="." index="0"]
 
 anchor_left = 1.0
 anchor_top = 0.0
@@ -109,7 +60,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "0"
 align = 2
 percent_visible = 1.0
@@ -117,7 +68,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
-[node name="MenuButton" type="Button" parent="." index="3"]
+[node name="MenuButton" type="Button" parent="." index="1"]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -134,7 +85,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -143,5 +94,74 @@ text = "MENU"
 flat = false
 align = 1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "custom_fonts" ]
+
+[node name="lists" type="VBoxContainer" parent="." index="2"]
+
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -150.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 0
+alignment = 0
+_sections_unfolded = [ "Theme", "custom_constants" ]
+
+[node name="skillList" type="ItemList" parent="lists" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 150.0
+margin_bottom = 300.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 3 )
+items = [  ]
+select_mode = 0
+allow_reselect = false
+auto_height = true
+icon_mode = 1
+fixed_icon_size = Vector2( 0, 0 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags", "custom_fonts" ]
+
+[node name="partyList" type="ItemList" parent="lists" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 300.0
+margin_right = 150.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+items = [  ]
+select_mode = 0
+allow_reselect = false
+auto_height = true
+icon_mode = 1
+fixed_icon_size = Vector2( 0, 0 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Anchor", "Columns", "Grow Direction", "Icon", "Margin", "Size Flags" ]
 
 

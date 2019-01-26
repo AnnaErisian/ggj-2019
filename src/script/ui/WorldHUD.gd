@@ -18,11 +18,8 @@ func _ready():
 	var char2 = Character.character.new("Char 2", [tempSkill, tempSkill2], 0, true)
 	party = Party.party.new([player, char1, char2])
 	
-	var windowHeight = rect_size.y
-	get_node("partyList").margin_bottom = windowHeight / 2
-	get_node("partyList").loadParty(party)
-	get_node("skillList").margin_top = windowHeight / 2 * -1
-	get_node("skillList").loadSkills(party)
+	get_node("lists/partyList").loadParty(party)
+	get_node("lists/skillList").loadSkills(party)
 	
 	get_node("currTime").text = str(get_tree().get_root().get_node("Main").get_node("MainData").currTime)
 
