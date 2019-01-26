@@ -20,4 +20,6 @@ func _ready():
 	get_node("partyList").loadParty(party)
 	get_node("skillList").margin_top = windowHeight / 2 * -1
 	get_node("skillList").loadSkills(party)
+	
+	get_node("currTime").text = str(get_tree().get_root().get_node("Main").get_node("MainData").currTime)
 
