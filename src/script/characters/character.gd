@@ -1,5 +1,5 @@
-const Schedule = preload("res://schedule.gd")
-const Obligation = preload("res://obligation.gd")
+const Schedule = preload("res://src/script/mechanics/schedule.gd")
+const Obligation = preload("res://src/script/mechanics/obligation.gd")
 
 var name = ""
 

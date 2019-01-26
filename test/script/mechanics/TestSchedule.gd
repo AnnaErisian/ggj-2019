@@ -1,7 +1,7 @@
 extends Node2D
 
-const Schedule = preload("res://schedule.gd")
-const Obligation = preload("res://obligation.gd")
+const Schedule = preload("res://src/script/mechanics/schedule.gd")
+const Obligation = preload("res://src/script/mechanics/obligation.gd")
 
 func _ready():
 	var s = Schedule.schedule.new()

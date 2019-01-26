@@ -1,4 +1,4 @@
-const Obligation = preload("res://obligation.gd")
+const Obligation = preload("res://src/script/mechanics/obligation.gd")
 
 class schedule:
 	var obligations = []
