@@ -6,15 +6,12 @@ class event:
 	var options = {}
 	var checks = {}
 	
-	# params: skill[] partySkills
+	# params: dictionary partySkills
 	func checkChecks(partySkills):
 		var failedChecks = {}
-		for skillToCheck in checks.Keys():
+		for skillToCheck in checks.keys():
 			var target = checks[skillToCheck]
-			var current = 0
-			for skill in partySkills:
-				if skill.name == skillToCheck:
-					current += skill.level
+			var current = partySkills[skillToCheck]
 			
 			var difference = current - target
 			if difference < 0:
@@ -22,4 +19,13 @@ class event:
 		
 		return failedChecks
 	
-	
+	# params: string option, dictionary partySkills
+	func selectOption(option, partySkills):
+		if !options.has(option):
+			return "Invalid option"
+		checks = options[option]["checks"]
+		var failures = checkChecks(partySkills)
+		if failures.empty():
+			return options[option]["success"]
+		return options[option]["failure"]
+		

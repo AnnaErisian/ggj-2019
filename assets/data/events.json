@@ -1,4 +1,22 @@
 {
+"Light Rain":{
+    "name": "Light Rain",
+    "description": "Rain sprinkles down, almost refreshing as you journey onwards.",
+    "time": 0,
+    "options":{
+        "Continue":{
+            "checks":{
+            },
+            "success":{
+                "text": "You arrive at your destination without much delay.",
+                "relationship": 1
+            },
+            "failure":{
+                "text": "You... were stopped by light rain???"
+            }
+        }
+    }
+},
 "Mild Rain":{
     "name": "Mild Rain",
     "description": "There is enough rain to make you and your family uncomfortable on the road and the progress is slower, if possible at all.",
@@ -6,12 +24,15 @@
     "options":{
         "Wait it out":{
             "checks":{
-                "leadership": 1
             },
-            "rewards":{
+            "success":{
+                "text": "You find some shelter and wait for the storm to pass.",
                 "time": -2,
                 "relationship": 2
-            }
+            },
+            "failure":{
+                "text": "You fail to find shelter from the storm, getting everyone soaked."
+            },
         },
         "Push onward":{
             "checks":{
@@ -19,12 +40,18 @@
                 "pathfinding": 2,
                 "animals": 2
             },
-            "rewards":{
+            "success":{
+                "text": "You venture out despite the rain.  The road is rough and everyone is wet, but you successfully navigate to you destination.",
                 "relationship": -1,
                 "xp-leadership": 3,
                 "xp-pathfinding": 1,
                 "xp-animals": 2
-            }
+            },
+            "failure":{
+                "text": "You attempt to push forward, despite the rain.  However, the road proves too difficult and you must circle back to where you started.",
+                "relationship": -4,
+                "xp-leadership": -1,
+            },
         }
     }
 }
