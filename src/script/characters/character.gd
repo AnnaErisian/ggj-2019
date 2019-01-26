@@ -36,7 +36,9 @@ class character:
 		
 	# Randomly sets a resource for the character to want.
 	# Weights against resources assigned to skills the
-	# character has 
+	# character has. Lower weights make it less likely
+	# the character will request a resource they know
+	# how to gather themselves.ck
 	func setResource(weight, list, quantity, replace=true):
 		if replace:
 			desiredResource.clear()

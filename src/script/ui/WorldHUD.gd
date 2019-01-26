@@ -8,9 +8,9 @@ var player
 var party
 
 func _ready():
-	var tempSkill = Skill.skill.new("tempSkill", "for testing", 0)
-	var tempSkill2 = Skill.skill.new("tempSkill2", "for testing", 2)
-	player = Character.character.new("Player", true, [tempSkill, tempSkill2], 0)
+	var tempSkill = Skill.skill.new("tempSkill", "for testing", "some resource", 0)
+	var tempSkill2 = Skill.skill.new("tempSkill2", "for testing", "some resources", 2)
+	player = Character.character.new("Player", [tempSkill, tempSkill2], 0, true)
 	party = Party.party.new([player])
 	
 	get_node("partyList").margin_bottom = OS.get_real_window_size().y / 2
