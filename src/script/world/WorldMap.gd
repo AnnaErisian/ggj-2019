@@ -4,7 +4,7 @@ export(PackedScene) var location_node
 
 const MapGen = preload("res://src/script/world/map.gd")
 
-const CELL_RADIUS = 40
+const CELL_RADIUS = 400
 const WORLD_RADIUS = 12
 
 
