@@ -1,0 +1,32 @@
+{
+"Mild Rain":{
+    "name": "Mild Rain",
+    "description": "There is enough rain to make you and your family uncomfortable on the road and the progress is slower, if possible at all.",
+    "time": 1,
+    "options":{
+        "Wait it out":{
+            "checks":{
+                "leadership": 1
+            },
+            "rewards":{
+                "time": -2,
+                "relationship": 2
+            }
+        },
+        "Push onward":{
+            "checks":{
+                "leadership": 2,
+                "pathfinding": 2,
+                "animals": 2
+            },
+            "rewards":{
+                "relationship": -1,
+                "xp-leadership": 3,
+                "xp-pathfinding": 1,
+                "xp-animals": 2
+            }
+        }
+    }
+}
+}
+
