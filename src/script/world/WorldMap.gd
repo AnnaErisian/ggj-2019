@@ -15,4 +15,8 @@ func _ready():
 	map.createLocations()
 	map.linkLocations()
 	map.shiftLocations()
-	print(map.locations.size())
+	
+	# Move player indicator to home
+	$PlayerIndicator.currentLocation = map.getNode(0,0,0)
+	$PlayerIndicator.position = map.getNode(0,0,0).position
+	$PlayerIndicator.createArrows()

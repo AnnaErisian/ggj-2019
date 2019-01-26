@@ -3,6 +3,7 @@ extends Camera2D
 var mouse_last_location
 var mouse_button_pressed
 
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -16,6 +17,7 @@ func _process(delta):
 		position = get_camera_screen_center()
 		position += (mouse_last_location - mouse_location) * zoom.x
 		mouse_last_location = mouse_location
+	
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -28,13 +30,13 @@ func _input(event):
 		elif event.button_index == BUTTON_WHEEL_UP:
 			zoom.x *= 1.1
 			zoom.y *= 1.1
-			zoom.x = clamp(zoom.x, .2, 4)
-			zoom.y = clamp(zoom.y, .2, 4)
+			zoom.x = clamp(zoom.x, .5, 3)
+			zoom.y = clamp(zoom.y, .5, 3)
 		elif event.button_index == BUTTON_WHEEL_DOWN:
 			zoom.x /= 1.1
 			zoom.y /= 1.1
-			zoom.x = clamp(zoom.x, .5, 2)
-			zoom.y = clamp(zoom.y, .5, 2)
+			zoom.x = clamp(zoom.x, .5, 3)
+			zoom.y = clamp(zoom.y, .5, 3)
 	elif event is InputEventKey:
 		if ! Input.is_key_pressed(KEY_SPACE):
 			mouse_button_pressed = false

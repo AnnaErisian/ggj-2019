@@ -14,7 +14,9 @@ func _init(cellRadius, worldRadius, nodeScene):
 	WORLD_RADIUS = worldRadius
 	WORLD_DIST_RADIUS = 3/2 * cellRadius * 12
 	location_node = nodeScene
-	
+
+func getNode(x,y,z):
+	return hexgrid["(%d, %d, %d)" % [x,y,z]]
 
 # @param: position Vector2
 func addLoc(position):
