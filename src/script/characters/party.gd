@@ -40,6 +40,16 @@ class party:
 		inactive.append(member)
 		sort()
 		
+	func skillTotals():
+		var totals = {}
+		for member in active:
+			for skill in member.skills:
+				if totals.has(skill.name):
+					totals[skill.name] += skill.level()
+				else:
+					totals[skill.name] = skill.level()
+		return totals
+		
 	func sort():
 		active.sort()
 		inactive.sort()

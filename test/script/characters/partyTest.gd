@@ -17,7 +17,7 @@ func listParty(p):
 
 func _ready():
 	# to do
-	var skone = Skill.skill.new("sk1", "desc1", 12)
+	var skone = Skill.skill.new("sk1", "desc1", 112)
 	var sktwo = Skill.skill.new("sk2", "desc2", 382)
 	var a = Character.character.new("a", true, [skone, sktwo], 150)
 	var b = Character.character.new("b", false, [skone, sktwo], 250)
@@ -46,3 +46,4 @@ func _ready():
 	listParty(p)
 	p.setActive(b)
 	listParty(p)
+	print(p.skillTotals())
