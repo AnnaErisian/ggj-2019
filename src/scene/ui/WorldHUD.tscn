@@ -3,13 +3,7 @@
 [ext_resource path="res://src/script/ui/WorldHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/VeraMono.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/script/ui/skillList.gd" type="Script" id=3]
-
-[sub_resource type="DynamicFont" id=2]
-
-size = 0
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
+[ext_resource path="res://src/script/ui/partyList.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -54,31 +48,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor" ]
 
-[node name="partyList" type="ItemList" parent="." index="1"]
-
-anchor_left = 1.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
-margin_left = -150.0
-margin_bottom = 150.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
-items = [  ]
-select_mode = 0
-allow_reselect = false
-max_text_lines = 2
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
-
-[node name="skillList" type="ItemList" parent="." index="2"]
+[node name="skillList" type="ItemList" parent="." index="1"]
 
 anchor_left = 1.0
 anchor_top = 1.0
@@ -103,5 +73,28 @@ icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
 script = ExtResource( 3 )
 _sections_unfolded = [ "Grow Direction", "Margin", "Rect", "custom_fonts" ]
+
+[node name="partyList" type="ItemList" parent="." index="2"]
+
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -150.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+items = [  ]
+select_mode = 0
+allow_reselect = false
+icon_mode = 1
+fixed_icon_size = Vector2( 0, 0 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
 
