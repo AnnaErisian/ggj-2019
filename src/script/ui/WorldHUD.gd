@@ -8,6 +8,9 @@ var player
 var party
 
 func _ready():
+	get_tree().get_root().get_node("Main").get_node("MainData").connect("time_updated", self, "on_timeUpdated")
+	
+	#TODO: remove temporary testing data
 	var tempSkill = Skill.skill.new("tempSkill", "for testing", "some resource", 0)
 	var tempSkill2 = Skill.skill.new("tempSkill2", "for testing", "some resources", 2)
 	player = Character.character.new("Player", [tempSkill, tempSkill2], 0, true)
@@ -15,7 +18,7 @@ func _ready():
 	var char2 = Character.character.new("Char 2", [tempSkill, tempSkill2], 0, true)
 	party = Party.party.new([player, char1, char2])
 	
-	var windowHeight = OS.get_real_window_size().y - 40
+	var windowHeight = rect_size.y
 	get_node("partyList").margin_bottom = windowHeight / 2
 	get_node("partyList").loadParty(party)
 	get_node("skillList").margin_top = windowHeight / 2 * -1
@@ -23,3 +26,6 @@ func _ready():
 	
 	get_node("currTime").text = str(get_tree().get_root().get_node("Main").get_node("MainData").currTime)
 
+func on_timeUpdated():
+	get_node("currTime").text = str(get_tree().get_root().get_node("Main").get_node("MainData").currTime)
+	

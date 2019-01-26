@@ -5,7 +5,7 @@
 [ext_resource path="res://src/scene/ui/WorldHUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/script/MainData.gd" type="Script" id=4]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" index="0"]
 
 [node name="WorldMap" parent="." index="0" instance=ExtResource( 1 )]
 

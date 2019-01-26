@@ -1,4 +1,17 @@
 extends Node
 
-var currTime = 20
+var currTime = 0
 var party
+
+
+signal time_updated
+
+# params: int timeToAdd
+func addTime(timeToAdd):
+	currTime += timeToAdd
+	emit_signal("time_updated")
+
+func _input(event):
+	if event is InputEventKey and event.scancode == KEY_T:
+		currTime += 1
+		emit_signal("time_updated")
