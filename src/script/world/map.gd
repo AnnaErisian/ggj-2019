@@ -85,7 +85,10 @@ func placeEvents():
 	for loc in locations:
 		if(loc != home):
 			loc.setLocationEvent(otherEvents[randi()%otherEvents.size()])
-	
+
+func finalizeLocations():
+	for loc in locations:
+		loc.setupPolygon()
 	
 	
 	

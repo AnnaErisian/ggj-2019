@@ -17,6 +17,7 @@ func _ready():
 	map.shiftLocations()
 	map.alterLinks()
 	map.placeEvents()
+	map.finalizeLocations()
 	
 	# Move player indicator to home
 	map.getNode(0,0,0).position = Vector2(0,0)
