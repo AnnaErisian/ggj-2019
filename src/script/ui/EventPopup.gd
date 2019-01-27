@@ -3,7 +3,7 @@ extends Control
 var event
 onready var head = get_node("MarginContainer/Panel/Header")
 onready var body = get_node("MarginContainer/Panel/BodyText")
-onready var buttonContainer = get_node("MarginContainer/Panel/HBoxContainer")
+onready var buttonContainer = get_node("MarginContainer/Panel/ButonContainer")
 export (PackedScene) var buttonPrototype
 
 func _ready():

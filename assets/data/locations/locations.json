@@ -142,7 +142,7 @@
                 "pathfinding": 2
 	        },
 	        "success":{
-    		    "event": "Encounter with the wizard"
+    		    "event": "Encounter With the Wizard"
 	        },
 	        "failure":{
 		        "text": "After tireless searching, you cannot find the wizard.  Perhaps he doesn't want to be found, or perhaps he doesn't exist at all.",
@@ -151,7 +151,7 @@
 	    }
     }
 },
-"Encounter with the wizard":{
+"Encounter With the Wizard":{
     "internal": true,
     "name": "Encounter With the Wizard",
     "description": "You find the old wizard practicing his magic in a small clearing",

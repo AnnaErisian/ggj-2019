@@ -1,16 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/script/world/Location.gd" type="Script" id=1]
 [ext_resource path="res://src/scene/ui/EventPopup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/script/world/locationVisual.gd" type="Script" id=3]
 
-[node name="Location" type="Node2D"]
+[node name="Location" type="Node2D" index="0"]
 
+z_as_relative = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 eventPopupScene = ExtResource( 2 )
 
 [node name="Visual" type="Polygon2D" parent="." index="0"]
 
+z_index = 1
+z_as_relative = false
 polygon = PoolVector2Array( -3, 3, 3, 3, 3, -3, -3, -3 )
 uv = PoolVector2Array(  )
 color = Color( 1, 1, 1, 1 )
@@ -23,5 +27,13 @@ texture_scale = Vector2( 1, 1 )
 texture_rotation_degrees = 0.0
 invert_enable = false
 invert_border = 100.0
+_sections_unfolded = [ "Z Index" ]
+
+[node name="Node2D" type="Node2D" parent="." index="1"]
+
+show_behind_parent = true
+z_as_relative = false
+script = ExtResource( 3 )
+_sections_unfolded = [ "Visibility", "Z Index" ]
 
 

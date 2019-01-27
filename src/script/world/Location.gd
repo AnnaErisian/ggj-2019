@@ -11,6 +11,8 @@ var debugPoints = []
 
 export (PackedScene) var eventPopupScene
 
+onready var visual = get_node("Visual")
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -23,10 +25,6 @@ func _ready():
 #	pass
 
 func _draw():
-	#print(str(directLinkedNodes.size()))
-	for n in directLinkedNodes:
-		draw_line(Vector2(0,0),n.position - position,Color(1,1,1))
-		draw_line(n.position - position,Vector2(0,0),Color(1,1,1))
 	if drawDebugPoints:
 		for n in debugPoints:
 			draw_circle(n, 20, $Visual.color)
