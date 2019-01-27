@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/fonts/VeraMono.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/script/ui/StartButton.gd" type="Script" id=2]
+[ext_resource path="res://src/script/ui/ExitButton.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -10,7 +12,7 @@ use_filter = false
 font_data = ExtResource( 1 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 
 size = 16
 use_mipmaps = false
@@ -18,7 +20,7 @@ use_filter = false
 font_data = ExtResource( 1 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 
 size = 16
 use_mipmaps = false
@@ -79,7 +81,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -87,6 +89,7 @@ group = null
 text = "Start Game"
 flat = false
 align = 1
+script = ExtResource( 2 )
 _sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
 [node name="Exit Button" type="Button" parent="." index="2"]
@@ -106,7 +109,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -114,6 +117,7 @@ group = null
 text = "Exit"
 flat = false
 align = 1
+script = ExtResource( 3 )
 _sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
 
