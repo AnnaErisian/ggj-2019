@@ -1,0 +1,162 @@
+{
+"Monster Camp":{
+    "name": "Monster Camp",
+    "description": "You come across a small group of monsters. Their musk of fills the air.",
+    "time": 2,
+    "color": "#cd7a1a",
+    "options":{
+        "Sneak Past":{
+            "checks":{
+                "stealth": 1
+            },
+            "success":{
+                "text": "You successfully sneak past the camp.",
+                "xp-stealth": 5
+            },
+            "failure":{
+                "text": "The monsters spot you and chase you off, pursuing you for some time.",
+                "time": 3
+            }
+        },
+        "Steal Treasure":{
+            "checks":{
+                "stealth": 4
+            },
+            "success":{
+                "text": "You nab the monsters treasure horde while they're not looking. The monsters are none the wiser.",
+                "time": 2,
+                "relationship": 1,
+                "xp-stealth": 10,
+                "additem-gold": 15,
+                "additem-meat": 2
+            },
+            "failure":{
+                "text": "The monsters spot you with your hand in their treasure pile.  You need to drop a few things to make your escape.",
+                "time": 4,
+                "xp-stealth": 5,
+                "additem-raw wood": -2,
+                "additem-meat": -2,
+                "additem-grains": -2,
+                "additem-ore": -2,
+                "additem-monster parts": -1,
+                "additem-artifacts": -1,
+                "additem-wood products": -1
+            }
+        },
+        "Fight":{
+            "checks":{
+                "fighting": 3
+            },
+            "success":{
+                "text": "You give the monsters a beating they won't soon forget, sending them running with whatever treasure they can carry.",
+                "time": 2,
+                "relationship": 2,
+                "xp-fighting": 10,
+                "additem-monster parts": 5,
+                "additem-gold": 5
+            },
+            "failure":{
+                "text": "The monsters prove to be too strong and beat you back.  You need to drop a few things to make your escape.",
+                "time": 4,
+                "xp-fighting": 5,
+                "additem-raw wood": -2,
+                "additem-meat": -2,
+                "additem-grains": -2,
+                "additem-ore": -2,
+                "additem-monster parts": -1,
+                "additem-artifacts": -1,
+                "additem-wood products": -1
+            }
+        },
+        "Do Not Engage":{
+            "checks":{
+            },
+            "success":{
+                "text": "You decide not to trifle with the monsters and give them plenty of space.",
+                "time": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
+"Mountain Path":{
+    "name": "Mountain Path",
+    "description": "You encounter a path that leads around the mountain towering before you.",
+    "time": 2,
+    "color": "#a1a1a1",
+    "options":{
+        "Follow Path":{
+            "checks":{
+            },
+            "success":{
+                "text": "You don't deviate from the path, staying safe and moving fast."
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Search for Ore":{
+            "checks":{
+                "mining": 2
+            },
+            "success":{
+                "text": "You find a small ore deposit and continue on after gathering it up.",
+                "time": 2,
+                "xp-mining": 5,
+                "additem-ore": 2
+            },
+            "failure":{
+                "text": "There doesn't appear to be any ore in the area, at least that you can see.",
+                "time": 4,
+                "xp-mining": 2
+            }
+        },
+        "Ascend the Mountain":{
+            "checks":{
+                "pathfinding": 4
+            },
+            "success":{
+                "event": "Snow Covered Peak"
+            },
+            "failure":{
+                "text": "You fail to find an adequate route up to the peak.",
+                "time": 4,
+                "additem-meat": -1,
+                "additem-grains": -1
+            }
+        }
+    }
+},
+"Snow Covered Peak":{
+    "internal": true,
+    "name": "Snow Covered Peak",
+    "description": "You trek your way up to the top of the mountain. It's a rough climb, but when you get there, the view is immaculate.",
+    "time": 4,
+    "options":{
+        "Admire the View": {
+	        "checks": {
+	        },
+	        "success": {
+		        "text": "You and your family sit triumphantly, looking into the world beyond.",
+                "time": 5,
+        		"relationship": 50
+	        },
+	        "failure": {
+		        "text": "ERROR"
+	        }
+        },
+        "Rush Back Down": {
+	        "checks": {
+	        },
+	        "success": {
+		        "text": "Having ascended the mountain, you see nothing of value and hurry back down to continue on your journey."
+	        },
+	        "failure": {
+		        "text": "ERROR"
+	        }
+	    }
+	}
+}
+}
