@@ -16,3 +16,16 @@ func loadScheduleMenu():
 		scheduleItem.loadCharacterData(character)
 		scheduleItem.rect_min_size = Vector2(2000, 100)
 		get_node("ColorRect/ScrollContainer/Schedules").add_child(scheduleItem)
+
+func _input(event):
+	if self.visible and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed() and get_node("ColorRect/ScrollContainer/Schedules").get_rect().has_point(event.position):
+		self.on_click(event)
+		print("CLICK")
+
+func on_click(event):
+	var idx = int((event.position.y + get_node("ColorRect/ScrollContainer").scroll_vertical) / 100)
+	if idx < get_node("ColorRect/ScrollContainer/Schedules").get_child_count():
+		get_node("ColorRect/ScrollContainer/Schedules").get_child(idx).addRequestPoint(event.position.x + get_node("ColorRect/ScrollContainer").scroll_horizontal)
+	
+	
+	
