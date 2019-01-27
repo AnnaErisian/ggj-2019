@@ -29,8 +29,8 @@ func _ready():
 	obsToAdd.append(Obligation.obligation.new(200, 250))
 	obsToAdd.append(Obligation.obligation.new(6, 8))
 	
-	for obs in obsToAdd:
-		player.schedule.addObligation(obs)
+	#for obs in obsToAdd:
+	#	player.schedule.addObligation(obs)
 	
 	
 	party = Party.party.new([char2, player, char1])
