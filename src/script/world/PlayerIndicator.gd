@@ -21,7 +21,6 @@ func _ready():
 	# Initialization here
 	$Icon/AnimationPlayer.play("Bounce")
 	camera = get_tree().get_root().get_node("Main/Camera2D")
-	mainData = get_tree().get_root().get_node("Main").get_node("MainData")
 	
 func _process(delta):
 	if(currentTarget != null):
@@ -42,7 +41,7 @@ func _process(delta):
 			camera.position += direction.normalized() * distance
 			travelTimeAccumulator += delta * TIME_SCALE
 			if(travelTimeAccumulator > TIME_HOUR_THRESHOLD):
-				mainData.addTime(1)
+				MainData.addTime(1)
 				travelTimeAccumulator -= TIME_HOUR_THRESHOLD
 	
 

@@ -72,7 +72,13 @@ class party:
 	# Finds a character by name and returns an object
 	# for that character
 	func findCharacter(name):
-		pass
+		for character in active:
+			if character.name == name:
+				return character
+		for character in inactive:
+			if character.name == name:
+				return character
+		return false
 	
 	# Returns a dict mapping skill names to total
 	# levels among active party members
