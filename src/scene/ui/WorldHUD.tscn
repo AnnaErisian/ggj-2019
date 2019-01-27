@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/script/ui/WorldHUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/VeraMono.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://src/script/ui/skillList.gd" type="Script" id=3]
-[ext_resource path="res://src/script/ui/partyList.gd" type="Script" id=4]
+[ext_resource path="res://src/script/ui/partyList.gd" type="Script" id=3]
+[ext_resource path="res://src/script/ui/skillList.gd" type="Script" id=4]
 [ext_resource path="res://src/script/ui/eventLog.gd" type="Script" id=5]
 [ext_resource path="res://src/script/ui/ScheduleButton.gd" type="Script" id=6]
 
@@ -87,7 +87,7 @@ custom_constants/separation = 0
 alignment = 0
 _sections_unfolded = [ "Margin", "Theme", "custom_constants" ]
 
-[node name="skillList" type="ItemList" parent="lists" index="0"]
+[node name="partyList" type="ItemList" parent="lists" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -95,6 +95,31 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 150.0
 margin_bottom = 300.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+items = [  ]
+select_mode = 0
+allow_reselect = false
+auto_height = true
+icon_mode = 1
+fixed_icon_size = Vector2( 0, 0 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Anchor", "Columns", "Grow Direction", "Icon", "Margin", "Size Flags" ]
+
+[node name="skillList" type="ItemList" parent="lists" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 300.0
+margin_right = 150.0
+margin_bottom = 600.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -111,33 +136,8 @@ allow_reselect = false
 auto_height = true
 icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
-script = ExtResource( 3 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags", "custom_fonts" ]
-
-[node name="partyList" type="ItemList" parent="lists" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 300.0
-margin_right = 150.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-items = [  ]
-select_mode = 0
-allow_reselect = false
-auto_height = true
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
 script = ExtResource( 4 )
-_sections_unfolded = [ "Anchor", "Columns", "Grow Direction", "Icon", "Margin", "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags", "custom_fonts" ]
 
 [node name="EventLog" type="ItemList" parent="." index="2"]
 
