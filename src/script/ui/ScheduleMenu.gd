@@ -1,7 +1,7 @@
 extends Control
 
 const ScheduleMenuItem = preload("res://src/scene/ui/Schedule.tscn")
-const MAX_WIDTH = 2000
+const MAX_WIDTH = 24*5*30
 
 var party
 

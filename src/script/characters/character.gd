@@ -4,8 +4,10 @@ class character:
 	const Skill = preload("res://src/script/characters/skill.gd")
 	
 	const bond_level_xp = 100
+	const MAX_BOND_LEVEL = 5
 	
 	var name = ""
+	var relationshipToPlayer = ""
 	
 	var inParty = false
 	var homeLocation = ""
@@ -32,8 +34,23 @@ class character:
 	
 	# Returns the character's bond level with the player
 	func bondLevel():
-		return bondXp / bond_level_xp
-		
+		return min(int(bondXp / bond_level_xp), MAX_BOND_LEVEL)
+	
+	func maxRequest():
+		match bondLevel():
+			0:
+				return 1
+			1:
+				return 5
+			2:
+				return 24
+			3:
+				return 24*3
+			4:
+				return 24*7
+			5:
+				return 24*14
+	
 	# Randomly sets a resource for the character to want.
 	# Weights against resources assigned to skills the
 	# character has. Lower weights make it less likely

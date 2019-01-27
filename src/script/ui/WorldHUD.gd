@@ -17,7 +17,7 @@ func _ready():
 	#TODO: remove temporary testing data
 	var tempSkill = Skill.skill.new("tempSkill", "for testing", "some resource", 0)
 	var tempSkill2 = Skill.skill.new("tempSkill2", "for testing", "some resources", 2)
-	player = Character.character.new("Player", [tempSkill, tempSkill2], 2400, true)
+	player = Character.character.new("Player", [tempSkill, tempSkill2], 210, true)
 	var char1 = Character.character.new("Char 1", [tempSkill, tempSkill2], 0, true)
 	var char2 = Character.character.new("Char 2", [tempSkill, tempSkill2], 0, true)
 	
@@ -29,13 +29,13 @@ func _ready():
 	obsToAdd.append(Obligation.obligation.new(200, 250))
 	obsToAdd.append(Obligation.obligation.new(6, 8))
 	
-	for obs in obsToAdd:
-		player.schedule.addObligation(obs)
+	#for obs in obsToAdd:
+	#	player.schedule.addObligation(obs)
 	
 	
 	party = Party.party.new([char2, player, char1])
 	party.player = player
-	MainData.party = party
+	#MainData.party = party
 	
 	get_node("lists/partyList").loadParty()
 	get_node("lists/skillList").loadSkills()

@@ -1,12 +1,17 @@
 const Obligation = preload("res://src/script/mechanics/obligation.gd")
 
+const MAX_OB_DURATION = 24*3
+
 class schedule:
 	var obligations = []
 	var requestedTime = null
 	var currentTime = 0
 	
-	func _ready():
+	func _init():
 		MainData.connect("time_updated", self, "on_timeUpdated")
+		generateObligations()
+		generateObligations()
+		generateObligations()
 	
 	func on_timeUpdated():
 		currentTime = MainData.currTime
@@ -16,8 +21,20 @@ class schedule:
 				toRemove.append(obligation)
 		for obligation in toRemove:
 			obligations.remove(obligation)
-		if requestedTime.endTime < MainData.currTime:
+		if requestedTime != null && requestedTime.endTime < MainData.currTime:
 			requestedTime = null
+		
+		generateObligations()
+	
+	func generateObligations():
+		if obligations.size() < 3:
+			var latestEnd = 0
+			for ob in obligations:
+				latestEnd = max(latestEnd, ob.endTime)
+			var earliestStart = latestEnd + 12
+			var startTime = randi() % (24*15) + earliestStart
+			var endTime = randi() % MAX_OB_DURATION + startTime
+			addObligation(Obligation.obligation.new(startTime, endTime))
 	
 	# params: Obligation obligation
 	func addObligation(obligation):

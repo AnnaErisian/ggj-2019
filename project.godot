@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Journey of the Soul"
-run/main_scene="res://src/scene/Main.tscn"
+run/main_scene="res://src/scene/ui/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -21,6 +21,7 @@ MainData="*res://src/script/MainData.gd"
 EventLoader="*res://src/script/world/EventLoader.gd"
 SkillLoader="*res://src/script/characters/SkillLoader.gd"
 LocationEventLoader="*res://src/script/world/LocationEventLoader.gd"
+JobLoader="*res://src/script/characters/JobLoader.gd"
 
 [rendering]
 
