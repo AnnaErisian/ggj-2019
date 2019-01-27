@@ -42,5 +42,5 @@ func destroySelf():
 func triggerEvent():
 	var hud = get_node("/root/Main/Camera2D/CanvasLayer/WorldHUD")
 	var popup = eventPopupScene.instance()
-	popup.instantiate(event)
+	popup.setEvent(event)
 	hud.add_child(popup)
