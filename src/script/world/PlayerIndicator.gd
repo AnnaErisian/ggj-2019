@@ -3,7 +3,7 @@ extends Node2D
 export (PackedScene) var arrowType
 var arrows = []
 
-const SPEED = 100
+const SPEED = 600
 const TIME_HOUR_THRESHOLD = 10
 const TIME_SCALE = 100
 

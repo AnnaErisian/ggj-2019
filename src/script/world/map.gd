@@ -64,9 +64,10 @@ func linkLocations():
 				node.link(hexgrid[str(n)])
 
 func shiftLocations():
+	var sf = 1
 	for loc in locations:
-		loc.position.x += randf()*CELL_RADIUS - CELL_RADIUS/2
-		loc.position.y += randf()*CELL_RADIUS - CELL_RADIUS/2
+		loc.position.x += sf*(randf()*CELL_RADIUS - CELL_RADIUS/2)
+		loc.position.y += sf*(randf()*CELL_RADIUS - CELL_RADIUS/2)
 		loc.position = loc.position.normalized() * WORLD_DIST_RADIUS * pow(abs(loc.position.length() * 1.0 / WORLD_DIST_RADIUS), 1.5)
 
 func alterLinks():
@@ -88,7 +89,7 @@ func placeEvents():
 
 func finalizeLocations():
 	for loc in locations:
-		loc.setupPolygon()
+		var x = loc.setupPolygon()
 	
 	
 	
