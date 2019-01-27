@@ -57,6 +57,13 @@
 	    "failure":{
 		"event": "Visit Jimbo's Shack"
 	    }
+	},
+	"Examine the Flower Grove":{
+	    "checks":{},
+	    "success":{
+		 "event": "Flower Grove"
+	    },
+	    "failure":{}
 	}
     }
 },
@@ -96,7 +103,7 @@
 		"activate-Jimbo The Anihilator": 1
 	    },
 	    "failure": {
-		"text": "Jimbo cannot join you (He may be busy, or he may be with you already"
+		"text": "Jimbo cannot join you (He may be busy, or he may be with you already.)"
 	    }
 	},
 	"Leave Jimbo Here": {
@@ -113,6 +120,54 @@
 	}
     }
 
+},
+"Flower Grove": {
+    "internal": true,
+    "name": "Flower Grove",
+    "description": "A field of highly deadly deadly nighshadestretches before you",
+    "time": 3,
+    "options": {
+	"Take a flower": {
+	    "checks":{},
+	    "success":{
+	        "text": "You take a deadly nightshade",
+		"additem-Nightshade": 1
+	    },
+	    "failure":{}
+	},
+	"Leave a flower":{
+ 	    "checks":{},
+	    "success":{
+                "text": "You leave a deadly nightshade",
+		"removeitem-Nightshade": 1
+            },
+	    "failure":{}
+	},
+	"Revel in your collection": {
+	    "checks":{
+		"ITEM-HAS-Nightshade": 5
+	    },
+	    "success":{
+		"text": "You revel in your collection of deadly flora",
+		"removeitem-Nightshade": 5
+	    },
+	    "failure":{
+		"text": "You don't have enough flowers to properly revel"
+	    }
+	},
+	"Take a lot of flowers": {
+	    "checks":{
+		"ITEM-LACKS-Nightshade": 5
+	    },
+	    "success": {
+		"text": "You swipe a bushel of nightshade",
+		"additem-Nightshade": 10
+	    },
+	    "failure": {
+		"text": "You have enough nightshade to kill an army.  Don't be greedy"
+	    }
+	}
+    }
 }
 
 }

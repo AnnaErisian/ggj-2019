@@ -78,14 +78,17 @@ func placeEvents():
 	var otherEvents = []
 	for event in events:
 		if(event == "Home"):
-			home.event = events[event]
+			home.setLocationEvent(events[event])
 		else:
 			if(!events[event].internal):
 				otherEvents.append(events[event])
 	for loc in locations:
 		if(loc != home):
-			loc.event = otherEvents[randi()%otherEvents.size()]
-	
+			loc.setLocationEvent(otherEvents[randi()%otherEvents.size()])
+
+func finalizeLocations():
+	for loc in locations:
+		loc.setupPolygon()
 	
 	
 	

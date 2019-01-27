@@ -23,9 +23,9 @@ func _ready():
 	
 	player.schedule = Schedule.schedule.new()
 	var obsToAdd = []
-	obsToAdd.append(Obligation.obligation.new(1, 100))
+	obsToAdd.append(Obligation.obligation.new(50, 100))
 	obsToAdd.append(Obligation.obligation.new(7, 10))
-	obsToAdd.append(Obligation.obligation.new(25, 40))
+	obsToAdd.append(Obligation.obligation.new(270, 295))
 	obsToAdd.append(Obligation.obligation.new(200, 250))
 	obsToAdd.append(Obligation.obligation.new(6, 8))
 	
@@ -33,12 +33,12 @@ func _ready():
 		player.schedule.addObligation(obs)
 	
 	
-	party = Party.party.new([player, char1, char2])
+	party = Party.party.new([char2, player, char1])
+	party.player = player
 	MainData.party = party
-	print(party.active)
 	
-	get_node("lists/partyList").loadParty(party)
-	get_node("lists/skillList").loadSkills(party)
+	get_node("lists/partyList").loadParty()
+	get_node("lists/skillList").loadSkills()
 	
 	get_node("currTime").text = str(MainData.currTime)
 
