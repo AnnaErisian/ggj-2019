@@ -14,14 +14,10 @@ func addTime(timeToAdd):
 func _input(event):
 	print(event)
 	if event is InputEventKey and event.pressed and not event.echo and event.scancode == KEY_ESCAPE:
-		
 		var pauseMenu = get_node("/root/Main/Camera2D/CanvasLayer/PauseMenu")
-		if pauseMenu.is_visible():
-			pauseMenu.hide()
-			Logger.write("is visible")
-		elif !pauseMenu.is_visible():
-			Logger.write("is not visible")
-			pauseMenu.show()
-
-		#Logger.write("Input received - " + str(currTime))
-		Logger.write("end")
+		if pauseMenu != null:
+			pauseMenu.loadLists()
+			if pauseMenu.is_visible():
+				pauseMenu.hide()
+			elif !pauseMenu.is_visible():
+				pauseMenu.show()
