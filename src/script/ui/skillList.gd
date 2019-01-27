@@ -3,6 +3,8 @@ extends ItemList
 const TOTAL_WIDTH = 15
 
 func loadSkills():
+	clear()
+	
 	add_item("Skill Totals:", null, false)
 	
 	var activeSkills = MainData.party.skillTotals()

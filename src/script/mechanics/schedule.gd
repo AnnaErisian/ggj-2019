@@ -20,7 +20,7 @@ class schedule:
 			if obligation.endTime < MainData.currTime:
 				toRemove.append(obligation)
 		for obligation in toRemove:
-			obligations.remove(obligation)
+			obligations.erase(obligation)
 		if requestedTime != null && requestedTime.endTime < MainData.currTime:
 			requestedTime = null
 		

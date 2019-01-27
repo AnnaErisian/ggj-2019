@@ -13,6 +13,7 @@ var party
 
 func _ready():
 	MainData.connect("time_updated", self, "on_timeUpdated")
+	MainData.party.connect("party_updated", self, "on_partyUpdated")
 	
 	#TODO: remove temporary testing data
 	var tempSkill = Skill.skill.new("tempSkill", "for testing", "some resource", 0)
@@ -44,4 +45,8 @@ func _ready():
 
 func on_timeUpdated():
 	get_node("currTime").text = str(MainData.currTime)
+	
+func on_partyUpdated():
+	get_node("lists/partyList").loadParty()
+	get_node("lists/skillList").loadSkills()
 	
