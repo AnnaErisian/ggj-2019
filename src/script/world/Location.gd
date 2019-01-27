@@ -2,6 +2,9 @@ extends Node2D
 
 var directLinkedNodes = []
 var softLinkedNodes = []
+var event
+
+export (PackedScene) var eventPopupScene
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -35,3 +38,9 @@ func destroySelf():
 	for n in softLinkedNodes:
 		n.softLinkedNodes.erase(self)
 	get_parent().remove_child(self)
+
+func triggerEvent():
+	var hud = get_node("/root/Main/Camera2D/CanvasLayer/WorldHUD")
+	var popup = eventPopupScene.instance()
+	popup.instantiate(event)
+	hud.add_child(popup)

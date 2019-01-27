@@ -2,7 +2,7 @@
 
 [ext_resource path="res://test/script/world/TestLoadEvents.gd" type="Script" id=1]
 
-[node name="TestEventLoad" type="Node2D"]
+[node name="TestEventLoad" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 

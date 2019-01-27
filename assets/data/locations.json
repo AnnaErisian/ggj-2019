@@ -1,0 +1,53 @@
+{
+"Home":{
+    "name": "Home",
+    "description": "The comfort of home fills you with the strength of hope.",
+    "time": 0,
+    "options":{
+        "Continue":{
+            "checks":{
+            },
+            "success":{
+                "text": "You'll be back.",
+                "relationship": 1
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
+"Forest Path":{
+    "name": "Forest Path",
+    "description": "Trees rise up around you.",
+    "time": 1,
+    "options":{
+        "Pass through":{
+            "checks":{
+            },
+            "success":{
+                "text": "You pass through the forest with the safety of the beaten path"
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Gather Lumber":{
+            "checks":{
+                "forestry": 2
+            },
+            "success":{
+                "text": "You gather some lumber and gain familiarity with this forest.",
+                "relationship": 1,
+                "xp-forestry": 3,
+                "xp-pathfinding": 1
+            },
+            "failure":{
+                "text": "You cannot find anything worth gathering, and end up spending too long looking.",
+                "time": -2
+            }
+        }
+    }
+}
+}
+

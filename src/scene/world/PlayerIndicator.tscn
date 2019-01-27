@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/script/world/PlayerIndicator.gd" type="Script" id=1]
-[ext_resource path="res://src/scene/world/Arrow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scene/ui/Arrow.tscn" type="PackedScene" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 0, -2 ), Vector2( 0, 2 ) ]
 }
 
-[node name="PlayerIndicator" type="Node2D" index="0"]
+[node name="PlayerIndicator" type="Node2D"]
 
 script = ExtResource( 1 )
 arrowType = ExtResource( 2 )
@@ -30,6 +30,7 @@ arrowType = ExtResource( 2 )
 [node name="Icon" type="Polygon2D" parent="." index="0"]
 
 position = Vector2( 0, 0.4 )
+z_index = 2
 polygon = PoolVector2Array( -20, -5, 0, -15, 20, -5, 15, 8, -15, 8 )
 uv = PoolVector2Array(  )
 color = Color( 1, 0, 0, 1 )
@@ -42,7 +43,7 @@ texture_scale = Vector2( 1, 1 )
 texture_rotation_degrees = 0.0
 invert_enable = false
 invert_border = 100.0
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Icon" index="0"]
 

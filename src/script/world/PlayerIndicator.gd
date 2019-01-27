@@ -3,7 +3,7 @@ extends Node2D
 export (PackedScene) var arrowType
 var arrows = []
 
-const SPEED = 400
+const SPEED = 100
 const TIME_HOUR_THRESHOLD = 10
 const TIME_SCALE = 100
 
@@ -36,11 +36,11 @@ func _process(delta):
 			currentTarget = null
 			createArrows()
 			travelTimeAccumulator = 0
+			currentLocation.triggerEvent()
 		else:
 			position += direction.normalized() * distance
 			camera.position += direction.normalized() * distance
 			travelTimeAccumulator += delta * TIME_SCALE
-			print(travelTimeAccumulator)
 			if(travelTimeAccumulator > TIME_HOUR_THRESHOLD):
 				mainData.addTime(1)
 				travelTimeAccumulator -= TIME_HOUR_THRESHOLD

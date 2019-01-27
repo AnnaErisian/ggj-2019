@@ -68,3 +68,34 @@ func shiftLocations():
 		loc.position.x += randf()*CELL_RADIUS - CELL_RADIUS/2
 		loc.position.y += randf()*CELL_RADIUS - CELL_RADIUS/2
 		loc.position = loc.position.normalized() * WORLD_DIST_RADIUS * pow(abs(loc.position.length() * 1.0 / WORLD_DIST_RADIUS), 1.5)
+
+func alterLinks():
+	pass
+
+func placeEvents():
+	var eventLoader = load("res://src/script/world/LocationEventLoader.gd").eventLoader.new()
+	eventLoader.loadEvents()
+	var events = eventLoader.events
+	var home = getNode(0,0,0)
+	for event in eventLoader.events:
+		if(event == "Home"):
+			home.event = events[event]
+		else:
+			for loc in locations:
+				if(loc != home):
+					loc.event = events[event]
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

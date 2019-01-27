@@ -6,6 +6,9 @@ class event:
 	var options = {}
 	var checks = {}
 	
+	func _init():
+		pass
+	
 	# params: dictionary partySkills
 	func checkChecks(partySkills):
 		var failedChecks = {}

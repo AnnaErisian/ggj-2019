@@ -37,7 +37,7 @@ use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 
-[node name="WorldHUD" type="Control" index="0"]
+[node name="WorldHUD" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -120,7 +120,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/separation = 0
 alignment = 0
-_sections_unfolded = [ "Theme", "custom_constants" ]
+_sections_unfolded = [ "Margin", "Theme", "custom_constants" ]
 
 [node name="skillList" type="ItemList" parent="lists" index="0"]
 

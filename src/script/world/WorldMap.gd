@@ -15,8 +15,11 @@ func _ready():
 	map.createLocations()
 	map.linkLocations()
 	map.shiftLocations()
+	map.alterLinks()
+	map.placeEvents()
 	
 	# Move player indicator to home
+	map.getNode(0,0,0).position = Vector2(0,0)
 	$PlayerIndicator.currentLocation = map.getNode(0,0,0)
 	$PlayerIndicator.position = map.getNode(0,0,0).position
 	$PlayerIndicator.createArrows()
