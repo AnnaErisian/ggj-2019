@@ -5,15 +5,19 @@ class schedule:
 	var requestedTime = null
 	var currentTime = 0
 	
-	# params: int currTime
-	func update(currTime):
-		currentTime = currTime
+	func _ready():
+		MainData.connect("time_updated", self, "on_timeUpdated")
+	
+	func on_timeUpdated():
+		currentTime = MainData.currTime
 		var toRemove = []
 		for obligation in obligations:
-			if obligation.endTime < currTime:
+			if obligation.endTime < MainData.currTime:
 				toRemove.append(obligation)
 		for obligation in toRemove:
 			obligations.remove(obligation)
+		if requestedTime.endTime < MainData.currTime:
+			requestedTime = null
 	
 	# params: Obligation obligation
 	func addObligation(obligation):
@@ -24,10 +28,10 @@ class schedule:
 			return 0
 		return -1
 	
-	# params: Obligation request, int maxAdjustment, int currTime
-	func requestTime(request, maxAdjustment, currTime):
+	# params: Obligation request, int maxAdjustment
+	func requestTime(request, maxAdjustment):
 		var initialObligations = obligations.duplicate()
-		currentTime = currTime
+		currentTime = MainData.currTime
 		
 		var conflicts = {}
 		addConflicts(conflicts, request)

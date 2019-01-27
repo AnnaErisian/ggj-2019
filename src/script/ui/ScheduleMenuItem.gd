@@ -1,22 +1,27 @@
 extends Control
 
-const OBLIGATION_HEIGHT = 25
+const Obligation = preload("res://src/script/mechanics/obligation.gd")
+
+const OBLIGATION_HEIGHT = 33
 const OBLIGATION_SCALE = 5
+const REQUEST_HEIGHT = 66
 const MAX_WIDTH = 2000
 
 var requestPoint1
 var requestPoint2
 var requestLine
 var character
+var schedule
 
 # params: Character chr
 func loadCharacterData(chr):
 	character = chr
 	
 	get_node("name").text = character.name
-	var schedule = character.schedule
+	schedule = character.schedule
 	
 	createVerticalLines()
+	createHorizontalLines()
 	
 	for obligation in schedule.obligations:
 		var startPoint = Vector2((obligation.startTime - MainData.currTime)*OBLIGATION_SCALE, OBLIGATION_HEIGHT)
@@ -29,8 +34,11 @@ func loadCharacterData(chr):
 		obLine.begin_cap_mode = obLine.LINE_CAP_ROUND
 		obLine.end_cap_mode = obLine.LINE_CAP_ROUND
 		add_child(obLine)
-	print("Loaded " + character.name)
 	
+	if schedule.requestedTime != null:
+		addRequestPoint((schedule.requestedTime.startTime - MainData.currTime)*OBLIGATION_SCALE)
+		addRequestPoint((schedule.requestedTime.endTime - MainData.currTime)*OBLIGATION_SCALE)
+
 func createVerticalLines():
 	var currX = OBLIGATION_SCALE * 24
 	while currX < MAX_WIDTH:
@@ -45,16 +53,28 @@ func createVerticalLines():
 		obLine.end_cap_mode = obLine.LINE_CAP_ROUND
 		add_child(obLine)
 		currX += OBLIGATION_SCALE * 24
-	
+
+func createHorizontalLines():
+	var startPoint = Vector2(0, 100)
+	var endPoint = Vector2(MAX_WIDTH, 100)
+	var obLine = Line2D.new()
+	obLine.add_point(startPoint)
+	obLine.add_point(endPoint)
+	obLine.default_color = Color(0, 0, 0)
+	obLine.width = 5
+	obLine.begin_cap_mode = obLine.LINE_CAP_ROUND
+	obLine.end_cap_mode = obLine.LINE_CAP_ROUND
+	add_child(obLine)
+
 func addRequestPoint(x):
 	if requestPoint1 == null or (requestPoint1 != null and requestPoint2 != null):
 		if requestLine != null:
 			remove_child(requestLine)
 		requestLine = null
 		requestPoint2 = null
-		requestPoint1 = Vector2(x - (int(x) % 5), 75)
+		requestPoint1 = Vector2(x - (int(x) % 5), REQUEST_HEIGHT)
 	else:
-		requestPoint2 = Vector2(x - (int(x) % 5), 75)
+		requestPoint2 = Vector2(x - (int(x) % 5), REQUEST_HEIGHT)
 		requestLine = Line2D.new()
 		requestLine.add_point(requestPoint1)
 		requestLine.add_point(requestPoint2)
@@ -63,9 +83,14 @@ func addRequestPoint(x):
 		requestLine.begin_cap_mode = requestLine.LINE_CAP_ROUND
 		requestLine.end_cap_mode = requestLine.LINE_CAP_ROUND
 		add_child(requestLine)
-	
-	
-	
+
+func submitRequest():
+	if requestLine == null:
+		return
+	var requestTime1 = (requestPoint1.x / OBLIGATION_SCALE) + MainData.currTime
+	var requestTime2 = (requestPoint2.x / OBLIGATION_SCALE) + MainData.currTime
+	var request = Obligation.obligation.new(min(requestTime1, requestTime2), max(requestTime1, requestTime2))
+	var result = schedule.requestTime(request, character.bondLevel())
 	
 	
 	
