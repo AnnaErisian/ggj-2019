@@ -7,6 +7,9 @@ class event:
 	var description = ""
 	var time = 0
 	
+	var eventColor
+	var eventType
+	
 	var internal = false
 	
 	var options = {}
