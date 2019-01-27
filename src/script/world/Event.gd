@@ -130,14 +130,15 @@ class event:
 		MainData.party.setInactive(MainData.party.findCharacter(name))
 		
 	func addItems(name, number):
-		print("Adding %d %s" % [number,name])
+		Logger.write("Gained %d %s" % [number, name])
 		MainData.party.addItems(name,number)
 		
 	func removeItems(name, number):
-		print("Losing %d %s" % [number,name])
+		Logger.write("Lost %d %s" % [number,name])
 		MainData.party.removeItems(name,number)
 	
 	func addRelationship(value):
+		Logger.write("Everyone gained %d relationship" % [value])
 		for npc in MainData.party.active:
 			npc.bondXp += value
 	

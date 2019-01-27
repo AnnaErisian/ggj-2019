@@ -123,6 +123,7 @@
             "failure":{
                 "text": "You fail to find an adequate route up to the peak.",
                 "time": 4,
+                "xp-pathfinding": 5,
                 "additem-meat": -1,
                 "additem-grains": -1
             }
