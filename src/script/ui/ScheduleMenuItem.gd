@@ -5,7 +5,7 @@ const Obligation = preload("res://src/script/mechanics/obligation.gd")
 const OBLIGATION_HEIGHT = 33
 const OBLIGATION_SCALE = 5
 const REQUEST_HEIGHT = 66
-const MAX_WIDTH = 2000
+const MAX_WIDTH = 24*5*30
 
 var requestPoint1
 var requestPoint2
@@ -102,7 +102,7 @@ func submitRequest():
 	var requestTime1 = (requestPoint1.x / OBLIGATION_SCALE) + MainData.currTime
 	var requestTime2 = (requestPoint2.x / OBLIGATION_SCALE) + MainData.currTime
 	var request = Obligation.obligation.new(min(requestTime1, requestTime2), max(requestTime1, requestTime2))
-	var result = schedule.requestTime(request, character.bondLevel())
+	var result = schedule.requestTime(request, character.maxRequest())
 	
 func _process(delta):
 	get_node("name").rect_position.x = get_parent().get_parent().scroll_horizontal
