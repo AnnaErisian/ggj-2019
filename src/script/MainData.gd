@@ -15,8 +15,9 @@ func _input(event):
 	print(event)
 	if event is InputEventKey and event.pressed and not event.echo and event.scancode == KEY_ESCAPE:
 		var pauseMenu = get_node("/root/Main/Camera2D/CanvasLayer/PauseMenu")
-		pauseMenu.loadLists()
-		if pauseMenu.is_visible():
-			pauseMenu.hide()
-		elif !pauseMenu.is_visible():
-			pauseMenu.show()
+		if pauseMenu != null:
+			pauseMenu.loadLists()
+			if pauseMenu.is_visible():
+				pauseMenu.hide()
+			elif !pauseMenu.is_visible():
+				pauseMenu.show()

@@ -47,3 +47,12 @@ func setInactive():
 		var character = MainData.party.active[selectedMember[0]]
 		MainData.party.setInactive(character)
 		loadLists()
+
+func setActive():
+	var inactive = get_node("InactiveParty")
+	var selectedMember = inactive.get_selected_items()
+	if selectedMember.size() == 1:
+		var character = MainData.party.inactive[selectedMember[0]]
+		if (character.isAvailable()):
+			MainData.party.setActive(character)
+			loadLists()
