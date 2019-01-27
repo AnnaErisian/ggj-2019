@@ -135,6 +135,53 @@
         }
     }
 },
+"Herd of Bison":{
+    "name": "Herd of Bison",
+    "description": "You come across a large herd of bison grazing in the fields.",
+    "time": 1,
+    "color": "#63f64a",
+    "options":{
+        "Admire the Scenery":{
+            "checks":{
+            },
+            "success":{
+                "text": "You take a moment to take in your surroundings.",
+                "time": 2,
+                "relationship": 3
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Hunt a Bision":{
+            "checks":{
+                "hunting": 1
+            },
+            "success":{
+                "text": "You slay the bison because you'll need the food for later.",
+                "time": 1,
+                "relationship": 2,
+                "xp-hunting": 5,
+                "additem-meat": 4
+            },
+            "failure":{
+                "text": "As if sensing your approach, the herd all move away from you.",
+                "time": 2,
+                "xp-hunting": 2
+            }
+        },
+        "Continue Onward":{
+            "checks":{
+            },
+            "success":{
+                "text": "You proceed without further delay."
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
 "Grassland":{
     "name": "Grassland",
     "description": "An empty, rolling grassland stretches out before you.",
@@ -254,6 +301,149 @@
                 "xp-pathfinding": 5,
                 "additem-meat": -1,
                 "additem-grains": -1
+            }
+        }
+    }
+},
+"Town of Camad":{
+    "name": "Town of Camad",
+    "description": "You arrive in Camad, a small town.  You see the townsfolk going about their daily business.  One middle-aged man is crouching next to a broken cart.",
+    "time": 2,
+    "color": "#6a4618",
+    "type": "town",
+    "options":{
+        "Pass Through Unnoticed":{
+            "checks":{
+                "stealth": 2
+            },
+            "success":{
+                "text": "You make it through without attracting much attention.",
+                "relationship": 2
+            },
+            "failure":{
+                "text": "Despite your efforts to go unnoticed, a wayward hand finds its way into your purse.",
+                "additem-gold": -2
+            }
+        },
+        "Offer to Fix a the Cart":{
+            "checks":{
+                "carpentry": 1
+            },
+            "success":{
+                "text": "It's a simple fix, but the man is extremely grateful.  Though he can only offer you a small reward.",
+                "time": 2,
+                "relationship": 5,
+                "xp-carpentry": 5,
+                "additem-grains": 1,
+                "additem-wood products": 1
+            },
+            "failure":{
+                "text": "You can't quite figure out what's wrong with the cart.  The man is sad, but grateful that you tried.",
+                "time": 3
+            }
+        },
+        "Purchase Supplies":{
+            "checks":{
+                "ITEM-HAS-gold": 4
+            },
+            "success":{
+                "text": "You make your way through the market, picking up a little bit of everything.",
+                "time": 2,
+                "xp-bartering": 2,
+                "additem-gold": -4,
+                "additem-raw wood": 1,
+                "additem-meat": 1,
+                "additem-grains": 1,
+                "additem-ore": 1,
+                "additem-wood products": 1
+            },
+            "failure":{
+                "text": "Unfortunately, you don't have the funds to purchase what you need, so you have to just move on."
+            }
+        },
+        "Haggle for Supplies":{
+            "checks":{
+                "ITEM-HAS-gold": 2,
+                "bartering": 1
+            },
+            "success":{
+                "text": "You're able to talk the shopkeep into dropping his price a little, so you pick up a little bit of everything.",
+                "time": 3,
+                "xp-bartering": 5,
+                "additem-gold": -2,
+                "additem-raw wood": 1,
+                "additem-meat": 1,
+                "additem-grains": 1,
+                "additem-ore": 1,
+                "additem-wood products": 1
+            },
+            "failure":{
+                "text": "Unfortunately, you aren't able to talk the shopkeep down to a price you like, so you just move on."
+            }
+        },
+        "Avoid the Town":{
+            "checks":{
+            },
+            "success":{
+                "text": "Everyone looks busy, so you don't want to bother anyone.  You skirt along the town and move on.",
+                "time": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
+"City of Darink":{
+    "name": "City of Darink",
+    "description": "You arrive in the City of Thieves, Darink.  The town is in disrepair, but you best have your wits about you here.",
+    "time": 2,
+    "color": "#191919",
+    "type": "city",
+    "options":{
+        "Pass Through Unnoticed":{
+            "checks":{
+                "stealth": 2
+            },
+            "success":{
+                "text": "You make it through without attracting much attention.",
+                "relationship": 2
+            },
+            "failure":{
+                "text": "Despite your efforts to go unnoticed, a wayward hand finds its way into your purse.",
+                "gold": -2
+            }
+        },
+        "Offer to Fix a Building":{
+            "checks":{
+                "carpentry": 2,
+                "HAS-ITEM-raw wood": 2
+            },
+            "success":{
+                "text": "Despite their reputation, the residents recognize a fine craftsman and reward you with some supplies.",
+                "time": 5,
+                "relationship": 5,
+                "xp-carpentry": 5,
+                "additem-raw wood": -2,
+                "additem-gold": 5,
+                "additem-meat": 1,
+                "additem-grains": 1
+            },
+            "failure":{
+                "text": "You fail to fix the building and the residents take you for just another thief.  They demand compensation, then send you on your way.",
+                "time": 4,
+                "gold": -3
+            }
+        },
+        "Avoid the City":{
+            "checks":{
+            },
+            "success":{
+                "text": "You want nothing to do with that crowd and avoid the city, no matter how long it takes.",
+                "time": 4
+            },
+            "failure":{
+                "text": "ERROR"
             }
         }
     }
