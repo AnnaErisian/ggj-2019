@@ -21,6 +21,7 @@
     "name": "Forest Path",
     "description": "Trees rise up around you.",
     "time": 1,
+    "color": "#338844",
     "options":{
         "Pass through":{
             "checks":{
