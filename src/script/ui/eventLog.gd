@@ -1,6 +1,6 @@
 extends ItemList
 
-var maxLength = 7
+var maxLength = 50
 
 
 func _ready():
