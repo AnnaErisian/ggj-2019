@@ -3,7 +3,8 @@ extends Node2D
 var directLinkedNodes = []
 var softLinkedNodes = []
 var event
-
+var visited = false
+	
 var preparedPoly = false
 
 var drawDebugPoints = false
@@ -24,7 +25,12 @@ func _ready():
 #	# Update game logic here.
 #	pass
 
+const white = Color("#FFFFFF")
 func _draw():
+	if event.eventType != "wilderness" and visited:
+		draw_circle(Vector2(0,0),20,white)
+		draw_circle(Vector2(0,0),16,$Visual.color)
+		print("ye")
 	if drawDebugPoints:
 		for n in debugPoints:
 			draw_circle(n, 20, $Visual.color)
@@ -39,7 +45,6 @@ func setupPolygon():
 		for n in neighbors:
 			averageNodeDirection += n.position - position
 		averageNodeDirection /= neighbors.size()
-		print(averageNodeDirection)
 		a.position = position + averageNodeDirection*-1
 		neighbors.append(a)
 	neighbors.sort_custom(AngleSorter.new(position), "sort")
@@ -74,7 +79,6 @@ func setupPolygon():
 				#drawDebugPoints = true
 				#debugPoints = points.duplicate()
 				var k = (i+2)%vectors.size()
-				print(v1.angle_to(v2))
 				var early_cross_a = [points[i], points[i]+vectors[i]]
 				var early_cross_b = [points[k], points[k]+vectors[k]]
 				var new_point = getIntersect(early_cross_a, early_cross_b)
@@ -83,7 +87,6 @@ func setupPolygon():
 				var point_to_remove_b = points[k]
 				points[k] = new_point
 				points.remove(j)
-				print("=================")
 				break
 	var avgdist = 0
 	for i in range(points.size()):
@@ -166,6 +169,8 @@ func triggerEvent():
 	var popup = eventPopupScene.instance()
 	popup.setEvent(event)
 	hud.add_child(popup)
+	visited = true
+	update()
 	
 func setLocationEvent(e):
 	event = e

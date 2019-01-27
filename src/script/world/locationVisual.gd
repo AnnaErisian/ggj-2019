@@ -7,6 +7,8 @@ func _ready():
 	pass
 
 
+const roadColor = Color("#886644")
+
 func _draw():
 	for n in p.directLinkedNodes:
-		draw_line(Vector2(0,0),n.position - p.position,Color("#886644"), 8.0, true)
+		draw_line(Vector2(0,0),n.position - p.position,roadColor, 8.0, true)

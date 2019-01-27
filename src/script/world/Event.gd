@@ -10,6 +10,8 @@ class event:
 	var eventColor
 	var eventType
 	
+	var eventImmediate = false
+	
 	var internal = false
 	
 	var options = {}
