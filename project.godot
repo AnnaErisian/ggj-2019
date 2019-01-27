@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Journey of the Soul"
-run/main_scene="res://src/scene/Main.tscn"
+run/main_scene="res://src/scene/ui/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
