@@ -12,8 +12,9 @@ func addTime(timeToAdd):
 
 # Opens the pause menu
 func _input(event):
+	print(event)
 	if event is InputEventKey and event.pressed and not event.echo and event.scancode == KEY_ESCAPE:
-		Logger.write("start " + str(menuDelay))
+		
 		var pauseMenu = get_node("/root/Main/Camera2D/CanvasLayer/PauseMenu")
 		if pauseMenu.is_visible():
 			pauseMenu.hide()
