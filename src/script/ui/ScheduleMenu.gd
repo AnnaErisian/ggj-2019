@@ -13,11 +13,18 @@ func loadScheduleMenu():
 	
 	var count = 0
 	for character in party.active:
-		var scheduleItem = ScheduleMenuItem.instance()
-		scheduleItem.loadCharacterData(character)
-		scheduleItem.rect_min_size = Vector2(MAX_WIDTH, 100)
-		get_node("ColorRect/ScrollContainer/Schedules").add_child(scheduleItem)
-
+		if !character.isPlayer:
+			var scheduleItem = ScheduleMenuItem.instance()
+			scheduleItem.loadCharacterData(character)
+			scheduleItem.rect_min_size = Vector2(MAX_WIDTH, 100)
+			get_node("ColorRect/ScrollContainer/Schedules").add_child(scheduleItem)
+	for character in party.inactive:
+		if !character.isPlayer:
+			var scheduleItem = ScheduleMenuItem.instance()
+			scheduleItem.loadCharacterData(character)
+			scheduleItem.rect_min_size = Vector2(MAX_WIDTH, 100)
+			get_node("ColorRect/ScrollContainer/Schedules").add_child(scheduleItem)
+			
 func _input(event):
 	if self.visible and event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed() and get_node("ColorRect/ScrollContainer/Schedules").get_rect().has_point(event.position):
 		self.on_click(event)

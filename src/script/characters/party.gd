@@ -3,6 +3,8 @@ const Skill = preload("res://src/script/characters/skill.gd")
 
 class party:
 	
+	signal party_updated
+	
 	var maxParty = 50
 	
 	# List of active and inactive party members
@@ -34,6 +36,7 @@ class party:
 				inactive.remove(inactive.find(member))
 				active.append(member)
 				sort()
+			emit_signal("party_updated")
 
 	# Sets an active party member to inactive. Leader must always remain in party.
 	func setInactive(member):
@@ -44,6 +47,7 @@ class party:
 				active.remove(active.find(member))
 				inactive.append(member)
 				sort()
+			emit_signal("party_updated")
 
 	# Adds a new character to the party. Default inactive.
 	func addMember(member):

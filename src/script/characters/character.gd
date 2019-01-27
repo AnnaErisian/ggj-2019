@@ -27,10 +27,18 @@ class character:
 	# 'player' specifies is this is the player character and
 	# will default to false.
 	func _init(charName, skillList, bond, player=false):
+		MainData.connect("time_updated", self, "on_timeUpdated")
+		randomize()
 		skills = skillList
 		isPlayer = player
 		bondXp = bond
 		name = charName
+	
+	func on_timeUpdated():
+		if !isPlayer && !isAvailable(MainData.currTime) && MainData.party.active.has(self):
+			bondXp = max(bondXp - 50, 0)
+			MainData.party.setInactive(self)
+			Logger.write(str(name) + " became busy and went back to " + str(homeLocation))
 	
 	# Returns the character's bond level with the player
 	func bondLevel():
