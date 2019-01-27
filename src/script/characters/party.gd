@@ -109,7 +109,7 @@ class party:
 			var tempChar = tempArr.pop_front()
 			var idx = 0
 			while idx < arr.size():
-				if tempChar < arr[idx]:
+				if tempChar.name < arr[idx].name:
 					break
 				idx += 1
 			arr.insert(idx, tempChar)
