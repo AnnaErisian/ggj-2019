@@ -20,5 +20,60 @@
         "skills": [
             "Bartering"
         ]
+    },
+    "carpenter": {
+        "name": "Carpenter",
+        "skills": [
+            "Carpentry"
+        ]
+    },
+    "miner": {
+        "name": "Miner",
+        "skills": [
+            "Mining"
+        ]
+    },
+    "scholar": {
+        "name": "Scholar",
+        "skills": [
+            "Magic"
+        ]
+    },
+    "fighter": {
+        "name": "Fighter",
+        "skills": [
+            "Fighting"
+        ]
+    },
+    "thief": {
+        "name": "Thief",
+        "skills": [
+            "Stealth"
+        ]
+    },
+    "lumberjack": {
+        "name": "Lumberjack",
+        "skills": [
+            "Forestry"
+        ]
+    },
+    "motivator": {
+        "name": "Motivator",
+        "skills": [
+            "Leadership"
+        ]
+    },
+    "wayfinder": {
+        "name": "Wayfinder",
+        "skills": [
+            "Pathfinding"
+        ]
+    },
+    "battle mage": {
+        "name": "Battle Mage",
+        "skills": [
+            "Magic",
+            "Fighting"
+        ]
     }
 }

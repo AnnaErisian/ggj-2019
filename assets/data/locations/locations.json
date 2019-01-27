@@ -40,11 +40,28 @@
                 "text": "You gather some lumber and gain familiarity with this forest.",
                 "relationship": 1,
                 "xp-forestry": 3,
-                "xp-pathfinding": 1
+                "xp-pathfinding": 1,
+                "additem-raw wood": 3
             },
             "failure":{
                 "text": "You cannot find anything worth gathering, and end up spending too long looking.",
-                "time": -2
+                "time": 2
+            }
+        },
+        "Hunt Wildlife":{
+            "checks":{
+                "hunting": 2
+            },
+            "success":{
+                "text": "You catch some small game and gain familiarity with this forest.",
+                "relationship": 1,
+                "xp-hunting": 3,
+                "xp-pathfinding": 1,
+                "additem-meat": 3
+            },
+            "failure":{
+                "text": "You cannot find anything worth hunting, and end up spending too long looking.",
+                "time": 2
             }
         },
 	"Seek the Ancient Shack":{
@@ -64,6 +81,129 @@
 		 "event": "Flower Grove"
 	    },
 	    "failure":{}
+	}
+    }
+},
+"Dense Forest":{
+    "name": "Dense Forest",
+    "description": "You come across a large mass of tree and bark, almost creating a wall.  Locals tell of an old wizard living around here.",
+    "time": 3,
+    "options":{
+        "Walk Around":{
+            "checks":{
+            },
+            "success":{
+                "text": "You skirt the edge of the forest with relative ease",
+                "time": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Gather Lumber":{
+            "checks":{
+                "forestry": 1,
+                "pathfinding": 1
+            },
+            "success":{
+                "text": "You gather some lumber and gain familiarity with this forest.",
+                "relationship": 1,
+                "xp-forestry": 2,
+                "xp-pathfinding": 2,
+                "additem-raw wood": 3,
+                "time": 1
+            },
+            "failure":{
+                "text": "You cannot find anything worth gathering, and end up spending too long looking.",
+                "time": 2
+            }
+        },
+        "Push Through":{
+            "checks":{
+                "forestry": 2,
+                "pathfinding": 2
+            },
+            "success":{
+                "text": "You hack your way through, gaining some lumber and familiarity with this forest.",
+                "relationship": 1,
+                "xp-forestry": 1,
+                "xp-pathfinding": 4,
+                "additem-raw wood": 1
+            },
+            "failure":{
+                "text": "You try to chop through the woods, but the forest appears too tough and you must turn around.",
+                "time": 4
+            }
+        },
+	    "Seek the old wizard":{
+	        "checks":{
+		        "forestry": 1,
+                "magic": 2,
+                "pathfinding": 2
+	        },
+	        "success":{
+    		    "event": "Encounter with the wizard"
+	        },
+	        "failure":{
+		        "text": "After tireless searching, you cannot find the wizard.  Perhaps he doesn't want to be found, or perhaps he doesn't exist at all.",
+                "time": 10
+	        }
+	    }
+    }
+},
+"Encounter with the wizard":{
+    "internal": true,
+    "name": "Encounter With the Wizard",
+    "description": "You find the old wizard practicing his magic in a small clearing",
+    "time": 3,
+    "options":{
+        "Spy On His Practice": {
+	    "checks": {
+            "stealth": 2
+	    },
+	    "success": {
+		    "text": "You observe the wizard undetected and learn much of his magic",
+    		"xp-magic": 25
+	    },
+	    "failure": {
+		    "text": "The wizard spots your snooping and hurls a fireball in your direction, causing you to drop some resources in your escape.  At least you got a good look at that fireball spell.",
+            "xp-magic": 10,
+            "additem-raw wood": -2,
+            "additem-meat": -2,
+            "additem-grains": -2,
+            "additem-gold": -2,
+            "additem-ore": -2,
+            "additem-monster parts": -1,
+            "additem-artifacts": -1,
+            "additem-wood products": -1
+	    }
+	},
+    "Ask to Purchase Artifacts": {
+	    "checks": {
+            "bartering": 2,
+            "ITEM-HAS-gold": 5
+	    },
+	    "success": {
+		    "text": "The wizard is happy to trade an artifact of his for some gold.",
+            "xp-bartering": 5,
+    		"additem-gold": -5,
+            "additem-artifacts": 1
+	    },
+	    "failure": {
+		    "text": "The wizard is not willing to sell for what you have.  You continue on your way without further incident.",
+            "xp-bartering": 2
+	    }
+	},
+	"Leave Him Alone": {
+	    "checks": {
+	    },
+	    "success":{
+		    "text": "You chose to let the wizard be and continue on your way.",
+		    "xp-magic": 2
+	    },
+	    "failure":{
+    		"text": "ERROR"
+	    }
 	}
     }
 },
