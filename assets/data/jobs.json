@@ -1,0 +1,24 @@
+{
+    "hunter": {
+        "name": "Hunter",
+        "skills": [
+            "Forestry",
+            "Hunting",
+            "Stealth",
+            "Fighting",
+        ]
+    },
+    "farmer": {
+        "name": "Farmer",
+        "skills": [
+            "Farming",
+            "Animals"
+        ]
+    },
+    "merchant": {
+        "name": "Merchant",
+        "skills": [
+            "Bartering"
+        ]
+    }
+}
