@@ -3,7 +3,7 @@ extends Node2D
 export (PackedScene) var arrowType
 var arrows = []
 
-const SPEED = 600
+const SPEED = 100
 const TIME_HOUR_THRESHOLD = 10
 const TIME_SCALE = 100
 
@@ -30,7 +30,7 @@ func _process(delta):
 			arrows = []
 		var distance = SPEED * delta
 		var direction = currentTarget.position - position
-		if(direction.length() < SPEED/100):
+		if(direction.length() < SPEED/100*5):
 			currentLocation = currentTarget
 			currentTarget = null
 			createArrows()

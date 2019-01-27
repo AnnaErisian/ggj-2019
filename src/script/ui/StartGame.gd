@@ -35,6 +35,7 @@ func initChar(party, node, player):
 		character.skills.append(SkillLoader.newSkill("Leadership"))
 	else:
 		character.relationshipToPlayer = get_node(node + "/Relationship")
+		character.homeLocation="Home"
 	for skill in character.skills:
 		skill.xp = 100
 	if player:
