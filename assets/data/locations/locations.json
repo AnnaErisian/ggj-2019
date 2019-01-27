@@ -128,7 +128,7 @@
     "description": "Trees rise up around you.",
     "time": 1,
     "type": "personage",
-    "color": "#33FF44",
+    "color": "#338844",
     "options":{
         "Pass through":{
             "checks":{
@@ -196,7 +196,7 @@
     "name": "Dense forest",
     "description": "You come across a large mass of tree and bark, almost creating a wall.  Locals tell of an old wizard living around here.",
     "time": 3,
-    "color": "#230011",
+    "color": "#237711",
     "type": "personage",
     "options":{
         "Walk Around":{
