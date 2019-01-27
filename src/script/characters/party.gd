@@ -1,12 +1,7 @@
 const Character = preload("res://src/script/characters/character.gd")
-const SkillLoader = preload("res://src/script/characters/skillLoader.gd")
 const Skill = preload("res://src/script/characters/skill.gd")
 
 class party:
-	# List of all possible skill objects, initialized at 0
-	var skillList = {}
-	
-	var skillLoader = null
 	
 	var maxParty = 50
 	
@@ -24,9 +19,6 @@ class party:
 	
 	# Initializes the party, all characters passed in here will start active.
 	func _init(characters):
-		skillLoader = SkillLoader.skillLoader.new()
-		skillLoader.loadSkills()
-		skillList = skillLoader.skills
 		active = characters
 		for c in characters:
 			if c.isPlayer:
@@ -63,7 +55,7 @@ class party:
 	func newCharacter(name, skillNames=[]):
 		var skills = []
 		for skName in skillNames:
-			var skill = skillLoader.newSkill(skName)
+			var skill = SkillLoader.newSkill(skName)
 			skills.append(skill)
 		var c = Character.character.new(name, skills, 0)
 		addMember(c)

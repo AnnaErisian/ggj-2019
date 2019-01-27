@@ -11,13 +11,15 @@ config_version=3
 [application]
 
 config/name="Journey of the Soul"
-run/main_scene="res://src/scene/ui/MainMenu.tscn"
+run/main_scene="res://src/scene/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Logger="*res://src/script/Logger.gd"
 MainData="*res://src/script/MainData.gd"
+EventLoader="*res://src/script/world/EventLoader.gd"
+SkillLoader="*res://src/script/characters/SkillLoader.gd"
 
 [rendering]
 

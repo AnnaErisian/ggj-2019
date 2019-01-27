@@ -1,5 +1,6 @@
+extends Node
+
 const Character = preload("res://src/script/characters/character.gd")
-const SkillLoader = preload("res://src/script/characters/skillLoader.gd")
 
 class event:
 	var name = ""
@@ -8,14 +9,11 @@ class event:
 	
 	var internal = false
 	
-	var skillLoader
-	
 	var options = {}
 	var checks = {}
 	
 	func _init():
-		skillLoader = SkillLoader.skillLoader.new()
-		skillLoader.loadSkills()
+		pass
 	
 	# params: dictionary partySkills
 	func checkChecks(partySkills):
@@ -92,7 +90,8 @@ class event:
 		var skills = chardata['skills']
 		var skillObjs = []
 		for skill in skills:
-			var ns = skillLoader.newSkill(skill.capitalize())
+			print(SkillLoader)
+			var ns = SkillLoader.newSkill(skill.capitalize())
 			ns.xp = 100*skills[skill]
 			skillObjs.append(ns)
 		var newb = Character.character.new(chardata['name'], skillObjs, chardata['initialBond'])
