@@ -23,12 +23,16 @@ class event:
 						pass
 					else:
 						failedChecks[skillToCheck] = 1
-				elif skillToCheck.substr(5,7) == "ACTIVE-" :
-					var member = MainData.party.findCharacter(skillToCheck.substr(12,100))
+				if skillToCheck.substr(5,9) == "NINPARTY-" :
+					var member = MainData.party.findCharacter(skillToCheck.substr(14,100))
+					if member:
+						failedChecks[skillToCheck] = 1
+				elif skillToCheck.substr(5,12) == "CANACTIVATE-" :
+					var member = MainData.party.findCharacter(skillToCheck.substr(17,100))
 					if !MainData.party.active.has(member):
 						failedChecks[skillToCheck] = 1
-				elif skillToCheck.substr(5,9) == "INACTIVE-" :
-					var member = MainData.party.findCharacter(skillToCheck.substr(14,100))
+				elif skillToCheck.substr(5,7) == "ACTIVE-" :
+					var member = MainData.party.findCharacter(skillToCheck.substr(12,100))
 					if !MainData.party.inactive.has(member):
 						failedChecks[skillToCheck] = 1
 			else:
