@@ -28,7 +28,7 @@ class event:
 						failedChecks[skillToCheck] = 1
 				elif skillToCheck.substr(5,9) == "NINPARTY-" :
 					var member = MainData.party.findCharacter(skillToCheck.substr(14,100))
-					if member:
+					if typeof(member) == TYPE_OBJECT:
 						failedChecks[skillToCheck] = 1
 				elif skillToCheck.substr(5,12) == "CANACTIVATE-" :
 					var member = MainData.party.findCharacter(skillToCheck.substr(17,100))
@@ -38,7 +38,7 @@ class event:
 					var member = MainData.party.findCharacter(skillToCheck.substr(12,100))
 					if !MainData.party.active.has(member):
 						failedChecks[skillToCheck] = 1
-			if skillToCheck.substr(0,5) == "ITEM-" :
+			elif skillToCheck.substr(0,5) == "ITEM-" :
 				if skillToCheck.substr(5,4) == "HAS-" :
 					var itemName = skillToCheck.substr(9,1000)
 					#print("Checking if we have %d %s (we have %s)" % [checks[skillToCheck], itemName, MainData.party.resources[itemName]])
@@ -62,7 +62,6 @@ class event:
 				var difference = current - target
 				if difference < 0:
 					failedChecks[skillToCheck] = difference
-		
 		return failedChecks
 	
 	# params: string option, dictionary partySkills
