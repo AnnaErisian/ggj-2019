@@ -9,6 +9,7 @@ const MAX_WIDTH = 2000
 
 var requestPoint1
 var requestPoint2
+var requestStartPointLine
 var requestLine
 var character
 var schedule
@@ -40,7 +41,7 @@ func loadCharacterData(chr):
 		addRequestPoint((schedule.requestedTime.endTime - MainData.currTime)*OBLIGATION_SCALE)
 
 func createVerticalLines():
-	var currX = OBLIGATION_SCALE * 24
+	var currX = OBLIGATION_SCALE * (24 - MainData.currTime)
 	while currX < MAX_WIDTH:
 		var startPoint = Vector2(currX, 0)
 		var endPoint = Vector2(currX, 100)
@@ -73,7 +74,18 @@ func addRequestPoint(x):
 		requestLine = null
 		requestPoint2 = null
 		requestPoint1 = Vector2(x - (int(x) % 5), REQUEST_HEIGHT)
+		
+		requestStartPointLine = Line2D.new()
+		requestStartPointLine.add_point(requestPoint1)
+		requestStartPointLine.add_point(Vector2(requestPoint1.x+1, requestPoint1.y))
+		requestStartPointLine.default_color = Color(0, 256, 0)
+		requestStartPointLine.width = 10
+		requestStartPointLine.begin_cap_mode = requestStartPointLine.LINE_CAP_ROUND
+		requestStartPointLine.end_cap_mode = requestStartPointLine.LINE_CAP_ROUND
+		add_child(requestStartPointLine)
 	else:
+		remove_child(requestStartPointLine)
+		requestStartPointLine = null
 		requestPoint2 = Vector2(x - (int(x) % 5), REQUEST_HEIGHT)
 		requestLine = Line2D.new()
 		requestLine.add_point(requestPoint1)
@@ -92,8 +104,8 @@ func submitRequest():
 	var request = Obligation.obligation.new(min(requestTime1, requestTime2), max(requestTime1, requestTime2))
 	var result = schedule.requestTime(request, character.bondLevel())
 	
-	
-	
+func _process(delta):
+	get_node("name").rect_position.x = get_parent().get_parent().scroll_horizontal
 	
 	
 	

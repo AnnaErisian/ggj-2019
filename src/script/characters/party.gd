@@ -77,11 +77,8 @@ class party:
 	# Returns a dict mapping skill names to total
 	# levels among active party members
 	func skillTotals():
-		print(active)
-		print(inactive)
 		var totals = {}
 		for member in active:
-			print(member)
 			for skill in member.skills:
 				if totals.has(skill.name):
 					totals[skill.name] += skill.level()
@@ -92,25 +89,31 @@ class party:
 	# Sorts both active and inactive lists.
 	# Party leader must remain in front of the active list.
 	func sort():
-		active.sort()
-		inactive.sort()
+		insertionSort(active)
+		insertionSort(inactive)
+		
 		active.remove(active.find(player))
 		active.push_front(player)
-	#	active.sort_custom(p, "partySort")
-	#	inactive.sort_custom(p, "partySort")
 		
-	# Sorting is hard
-	func partySort(a, b):
-		if a.name < b.name:
-			return true
-		return false
+	# params: Character[] arr
+	func insertionSort(arr):
+		var tempArr = arr.duplicate()
+		arr.clear()
+		
+		while tempArr.size() > 0:
+			var tempChar = tempArr.pop_front()
+			var idx = 0
+			while idx < arr.size():
+				if tempChar < arr[idx]:
+					break
+				idx += 1
+			arr.insert(idx, tempChar)
 	
 	func addItems(name, number):
 		if(resources.has(name)):
 			resources[name] += number
 		else:
 			resources[name] = number
-	
 	
 	func removeItems(name, number):
 		if(resources.has(name)):
