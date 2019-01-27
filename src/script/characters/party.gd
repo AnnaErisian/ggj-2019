@@ -104,4 +104,29 @@ class party:
 		if a.name < b.name:
 			return true
 		return false
+	
+	func addItems(name, number):
+		if(resources.has(name)):
+			resources[name] += number
+		else:
+			resources[name] = number
+	
+	
+	func removeItems(name, number):
+		if(resources.has(name)):
+			if resources[name] > number:
+				#more than enough
+				resources[name] -= number
+				return true
+			elif resources[name] == number:
+				#just enough
+				resources.erase(name)
+				return true
+			else:
+				#we dont have that many 
+				resources.erase(name)
+				return false
+		else:
+			return false
+		
 		

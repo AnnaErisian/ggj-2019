@@ -38,6 +38,21 @@ class event:
 					var member = MainData.party.findCharacter(skillToCheck.substr(12,100))
 					if !MainData.party.active.has(member):
 						failedChecks[skillToCheck] = 1
+			if skillToCheck.substr(0,5) == "ITEM-" :
+				if skillToCheck.substr(5,4) == "HAS-" :
+					var itemName = skillToCheck.substr(9,1000)
+					#print("Checking if we have %d %s (we have %s)" % [checks[skillToCheck], itemName, MainData.party.resources[itemName]])
+					if MainData.party.resources.has(itemName) and MainData.party.resources[itemName] >= checks[skillToCheck]:
+						pass
+					else:
+						failedChecks[skillToCheck] = 1
+				if skillToCheck.substr(5,6) == "LACKS-" :
+					var itemName = skillToCheck.substr(11,1000)
+					#print("Checking if we lack %d %s (we have %s)" % [checks[skillToCheck], itemName, MainData.party.resources[itemName]])
+					if !MainData.party.resources.has(itemName) or MainData.party.resources[itemName] < checks[skillToCheck]:
+						pass
+					else:
+						failedChecks[skillToCheck] = 1
 			else:
 				var target = checks[skillToCheck]
 				var current = 0
@@ -76,6 +91,10 @@ class event:
 					activateCharacter(result.substr(9,100))
 				if result.substr(0,11) == "deactivate-":
 					deactivateCharacter(result.substr(11,100))
+				if result.substr(0,8) == "additem-":
+					addItems(result.substr(8,100), value)
+				if result.substr(0,11) == "removeitem-":
+					removeItems(result.substr(11,100), value)
 				elif result == "relationship":
 					addRelationship(value)
 				elif result == "time":
@@ -90,7 +109,6 @@ class event:
 		var skills = chardata['skills']
 		var skillObjs = []
 		for skill in skills:
-			print(SkillLoader)
 			var ns = SkillLoader.newSkill(skill.capitalize())
 			ns.xp = 100*skills[skill]
 			skillObjs.append(ns)
@@ -106,6 +124,14 @@ class event:
 	
 	func deactivateCharacter(name):
 		MainData.party.setInactive(MainData.party.findCharacter(name))
+		
+	func addItems(name, number):
+		print("Adding %d %s" % [number,name])
+		MainData.party.addItems(name,number)
+		
+	func removeItems(name, number):
+		print("Losing %d %s" % [number,name])
+		MainData.party.removeItems(name,number)
 	
 	func addRelationship(value):
 		for npc in MainData.party.active:
