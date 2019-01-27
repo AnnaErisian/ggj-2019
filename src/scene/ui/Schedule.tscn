@@ -11,7 +11,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Schedule" type="Control"]
+[node name="Schedule" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,7 +26,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Margin" ]
+_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
 [node name="name" type="Label" parent="." index="0"]
 
@@ -34,8 +34,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 14.0
+margin_right = 63.0
+margin_bottom = 15.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -48,14 +48,5 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
-
-[node name="Line2D" type="Line2D" parent="." index="1"]
-
-points = PoolVector2Array( 10, 25, 50, 25 )
-width = 5.0
-default_color = Color( 1, 0, 0, 1 )
-texture_mode = 105
-sharp_limit = 2.0
-round_precision = 8
 
 
