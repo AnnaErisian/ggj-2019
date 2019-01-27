@@ -21,7 +21,7 @@ class schedule:
 				toRemove.append(obligation)
 		for obligation in toRemove:
 			obligations.remove(obligation)
-		if requestedTime.endTime < MainData.currTime:
+		if requestedTime != null && requestedTime.endTime < MainData.currTime:
 			requestedTime = null
 		
 		generateObligations()

@@ -23,6 +23,7 @@ func initChar(party, node, player):
 	var skillsIndex = get_node(node + "/Job").get_selected_items()
 	var jobValues = JobLoader.jobs.values()
 	if skillsIndex.size() == 0:
+		randomize()
 		skillsIndex = [randi()% jobValues.size()]
 	var skills = jobValues[skillsIndex[0]]
 	
@@ -36,4 +37,8 @@ func initChar(party, node, player):
 		character.relationshipToPlayer = get_node(node + "/Relationship")
 	for skill in character.skills:
 		skill.xp = 100
+	if player:
+		for skill in SkillLoader.skills:
+			if !(skill in skills):
+				character.skills.append(SkillLoader.newSkill(skill))
 	party.setActive(character)
