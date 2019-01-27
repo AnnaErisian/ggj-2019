@@ -77,13 +77,16 @@ func placeEvents():
 	eventLoader.loadEvents()
 	var events = eventLoader.events
 	var home = getNode(0,0,0)
+	var otherEvents = []
 	for event in eventLoader.events:
 		if(event == "Home"):
 			home.event = events[event]
 		else:
-			for loc in locations:
-				if(loc != home):
-					loc.event = events[event]
+			if(!events[event].internal):
+				otherEvents.append(events[event])
+	for loc in locations:
+		if(loc != home):
+			loc.event = otherEvents[randi()%otherEvents.size()]
 	
 	
 	

@@ -21,5 +21,6 @@ class skillLoader:
 		
 	# Creates a copy of a skill object
 	func newSkill(skName):
-		var sk = Skill.skill.new(skills[skName].name, skills[skName].description, skills[skName].resource, skills[skName].xp)
+		var orig_sk = skills[skName]
+		var sk = Skill.skill.new(orig_sk.name, orig_sk.description, orig_sk.resource, orig_sk.xp)
 		return sk

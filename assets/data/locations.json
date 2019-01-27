@@ -46,8 +46,74 @@
                 "text": "You cannot find anything worth gathering, and end up spending too long looking.",
                 "time": -2
             }
-        }
+        },
+	"Seek the Ancient Shack":{
+	    "checks":{
+		"SPEC-NINPARTY-Jimbo The Anihilator": 1
+	    },
+	    "success":{
+		"event": "Recruit Jimbo"
+	    },
+	    "failure":{
+		"event": "Visit Jimbo's Shack"
+	    }
+	}
     }
+},
+"Recruit Jimbo":{
+    "internal": true,
+    "name": "Recruit Jimbo",
+    "description": "Jimbo wants to join your party.",
+    "time": 0,
+    "options":{
+        "Accept this gracious offer.":{
+	    "checks":{},
+	    "success":{
+		"text": "Jimbo joins your party",
+		"join": {
+		    "name": "Jimbo The Anihilator",
+		    "skills": {"forestry": 8},
+		    "initialBond": 100,
+		    "immediatelyActive": 1
+		}
+	    },
+	    "failure":{}
+	}
+    }
+},
+"Visit Jimbo's Shack":{
+    "internal": true,
+    "name": "Visit Jimbo's Shack",
+    "description": "Well at least Jimbo is happy to be here",
+    "time": 2,
+    "options":{
+        "Take Jimbo With You": {
+	    "checks": {
+                "SPEC-CANACTIVATE-Jimbo The Anihilator": 1
+	    },
+	    "success": {
+		"text": "Jimbo joins you on your journey",
+		"activate-Jimbo The Anihilator": 1
+	    },
+	    "failure": {
+		"text": "Jimbo cannot join you (He may be busy, or he may be with you already"
+	    }
+	},
+	"Leave Jimbo Here": {
+	    "checks": {
+		 "SPEC-ACTIVE-Jimbo The Anihilator": 1
+	    },
+	    "success":{
+		"text": "Jimbo will wait.",
+		"deactivate-Jimbo The Anihilator": 1
+	    },
+	    "failure":{
+		"text": "Jimbo is not traveling with you currently"
+	    }
+	}
+    }
+
 }
+
 }
 

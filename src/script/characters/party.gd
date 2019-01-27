@@ -73,9 +73,11 @@ class party:
 	# for that character
 	func findCharacter(name):
 		for character in active:
+			print(character.name)
 			if character.name == name:
 				return character
 		for character in inactive:
+			print(character.name)
 			if character.name == name:
 				return character
 		return false
@@ -83,8 +85,11 @@ class party:
 	# Returns a dict mapping skill names to total
 	# levels among active party members
 	func skillTotals():
+		print(active)
+		print(inactive)
 		var totals = {}
 		for member in active:
+			print(member)
 			for skill in member.skills:
 				if totals.has(skill.name):
 					totals[skill.name] += skill.level()

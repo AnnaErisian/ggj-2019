@@ -19,5 +19,6 @@ class eventLoader:
 		eventToAdd.description = event["description"]
 		eventToAdd.time = event["time"]
 		eventToAdd.options = event["options"]
+		eventToAdd.internal = event.has("internal")
 		
 		events[eventToAdd.name] = eventToAdd

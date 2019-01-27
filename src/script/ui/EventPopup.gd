@@ -4,6 +4,7 @@ var event
 onready var head = get_node("MarginContainer/Panel/Header")
 onready var body = get_node("MarginContainer/Panel/BodyText")
 onready var buttonContainer = get_node("MarginContainer/Panel/HBoxContainer")
+onready var eventLoader = load("res://src/script/world/LocationEventLoader.gd").eventLoader.new()
 export (PackedScene) var buttonPrototype
 
 func _ready():
@@ -26,17 +27,26 @@ func setEvent(locationEvent):
 	event = locationEvent
 
 func processChoice(optionKey):
+	print( MainData.party.skillTotals())
 	var results = event.selectOption(optionKey, MainData.party.skillTotals())
-	for child in buttonContainer.get_children():
-		buttonContainer.remove_child(child)
-	head.text = ""
-	body.text = results['text']
 	event.applyResults(results)
-	var btn = buttonPrototype.instance()
-	btn.text = "Continue"
-	btn.end = true
-	btn.eventMaster = self
-	buttonContainer.add_child(btn)
+	if(results.has("event")):
+		eventLoader.loadEvents()
+		var hud = get_node("/root/Main/Camera2D/CanvasLayer/WorldHUD")
+		var popup = load("res://src/scene/ui/EventPopup.tscn").instance()
+		popup.setEvent(eventLoader.events[results["event"]])
+		hud.add_child(popup)
+		hud.remove_child(self)
+	else:
+		for child in buttonContainer.get_children():
+			buttonContainer.remove_child(child)
+		head.text = ""
+		body.text = results['text']
+		var btn = buttonPrototype.instance()
+		btn.text = "Continue"
+		btn.end = true
+		btn.eventMaster = self
+		buttonContainer.add_child(btn)
 
 func destroySelf():
 	get_parent().remove_child(self)

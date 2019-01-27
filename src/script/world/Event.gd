@@ -1,16 +1,21 @@
 const Character = preload("res://src/script/characters/character.gd")
-const Skill = preload("res://src/script/characters/skill.gd")
+const SkillLoader = preload("res://src/script/characters/skillLoader.gd")
 
 class event:
 	var name = ""
 	var description = ""
 	var time = 0
 	
+	var internal = false
+	
+	var skillLoader
+	
 	var options = {}
 	var checks = {}
 	
 	func _init():
-		pass
+		skillLoader = SkillLoader.skillLoader.new()
+		skillLoader.loadSkills()
 	
 	# params: dictionary partySkills
 	func checkChecks(partySkills):
@@ -23,23 +28,23 @@ class event:
 						pass
 					else:
 						failedChecks[skillToCheck] = 1
-				if skillToCheck.substr(5,9) == "NINPARTY-" :
+				elif skillToCheck.substr(5,9) == "NINPARTY-" :
 					var member = MainData.party.findCharacter(skillToCheck.substr(14,100))
 					if member:
 						failedChecks[skillToCheck] = 1
 				elif skillToCheck.substr(5,12) == "CANACTIVATE-" :
 					var member = MainData.party.findCharacter(skillToCheck.substr(17,100))
-					if !MainData.party.active.has(member):
+					if MainData.party.active.has(member):
 						failedChecks[skillToCheck] = 1
 				elif skillToCheck.substr(5,7) == "ACTIVE-" :
 					var member = MainData.party.findCharacter(skillToCheck.substr(12,100))
-					if !MainData.party.inactive.has(member):
+					if !MainData.party.active.has(member):
 						failedChecks[skillToCheck] = 1
 			else:
 				var target = checks[skillToCheck]
 				var current = 0
-				if partySkills.has(skillToCheck) :
-					current = partySkills[skillToCheck]
+				if partySkills.has(skillToCheck.capitalize()) :
+					current = partySkills[skillToCheck.capitalize()]
 				
 				var difference = current - target
 				if difference < 0:
@@ -84,9 +89,16 @@ class event:
 				npc.skills[skill].xp += value
 		
 	func addNewCharacter(chardata):
-		var newb = Character.character.new(chardata['name'], chardata['skills'], chardata['initialBond'])
+		var skills = chardata['skills']
+		var skillObjs = []
+		for skill in skills:
+			var ns = skillLoader.newSkill(skill.capitalize())
+			ns.xp = 100*skills[skill]
+			skillObjs.append(ns)
+		var newb = Character.character.new(chardata['name'], skillObjs, chardata['initialBond'])
 		MainData.party.addMember(newb)
-		if chardata.has('immediatelyActive') and chardata['immediatelyActive']!="false":
+		if chardata.has('immediatelyActive'):
+			print("activating new party member immediately")
 			MainData.party.setActive(newb)
 			
 	
