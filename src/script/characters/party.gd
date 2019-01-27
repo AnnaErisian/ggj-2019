@@ -18,7 +18,7 @@ class party:
 	var player = null
 	
 	# Initializes the party, all characters passed in here will start active.
-	func _init(characters):
+	func _init(characters=[]):
 		active = characters
 		for c in characters:
 			if c.isPlayer:
@@ -92,8 +92,9 @@ class party:
 		insertionSort(active)
 		insertionSort(inactive)
 		
-		active.remove(active.find(player))
-		active.push_front(player)
+		if player != null:
+			active.remove(active.find(player))
+			active.push_front(player)
 		
 	# params: Character[] arr
 	func insertionSort(arr):

@@ -35,7 +35,7 @@ func _ready():
 	
 	party = Party.party.new([char2, player, char1])
 	party.player = player
-	MainData.party = party
+	#MainData.party = party
 	
 	get_node("lists/partyList").loadParty()
 	get_node("lists/skillList").loadSkills()

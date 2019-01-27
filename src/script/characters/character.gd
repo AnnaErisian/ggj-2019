@@ -7,6 +7,7 @@ class character:
 	const MAX_BOND_LEVEL = 5
 	
 	var name = ""
+	var relationshipToPlayer = ""
 	
 	var inParty = false
 	var homeLocation = ""
