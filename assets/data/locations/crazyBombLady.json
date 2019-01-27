@@ -5,7 +5,6 @@
     "time": 1,
     "type": "personage",
     "color": "#220000",
-    "immediate": 1,
     "options":{
         "Venture Inside":{
 	    "checks":{
