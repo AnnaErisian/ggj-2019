@@ -8,7 +8,7 @@ func loadScheduleMenu():
 	for child in get_node("ColorRect/ScrollContainer/Schedules").get_children():
 		get_node("ColorRect/ScrollContainer/Schedules").remove_child(child)
 		
-	party = get_tree().get_root().get_node("Main").get_node("MainData").party
+	party = MainData.party
 	
 	var count = 0
 	for character in party.active:

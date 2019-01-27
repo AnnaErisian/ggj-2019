@@ -35,6 +35,7 @@ func _ready():
 	
 	party = Party.party.new([player, char1, char2])
 	MainData.party = party
+	print(party.active)
 	
 	get_node("lists/partyList").loadParty(party)
 	get_node("lists/skillList").loadSkills(party)

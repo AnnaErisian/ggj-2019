@@ -3,7 +3,7 @@
 [ext_resource path="res://src/script/ui/ScheduleMenu.gd" type="Script" id=1]
 [ext_resource path="res://src/script/ui/ExitScheduleMenuButton.gd" type="Script" id=2]
 
-[node name="ScheduleMenu" type="Control"]
+[node name="ScheduleMenu" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
