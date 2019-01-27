@@ -4,7 +4,6 @@ var event
 onready var head = get_node("MarginContainer/Panel/Header")
 onready var body = get_node("MarginContainer/Panel/BodyText")
 onready var buttonContainer = get_node("MarginContainer/Panel/HBoxContainer")
-onready var eventLoader = load("res://src/script/world/LocationEventLoader.gd").eventLoader.new()
 export (PackedScene) var buttonPrototype
 
 func _ready():
@@ -31,10 +30,9 @@ func processChoice(optionKey):
 	var results = event.selectOption(optionKey, MainData.party.skillTotals())
 	event.applyResults(results)
 	if(results.has("event")):
-		eventLoader.loadEvents()
 		var hud = get_node("/root/Main/Camera2D/CanvasLayer/WorldHUD")
 		var popup = load("res://src/scene/ui/EventPopup.tscn").instance()
-		popup.setEvent(eventLoader.events[results["event"]])
+		popup.setEvent(LocationEventLoader.events[results["event"]])
 		hud.add_child(popup)
 		hud.remove_child(self)
 	else:

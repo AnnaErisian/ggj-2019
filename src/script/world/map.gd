@@ -73,12 +73,10 @@ func alterLinks():
 	pass
 
 func placeEvents():
-	var eventLoader = load("res://src/script/world/LocationEventLoader.gd").eventLoader.new()
-	eventLoader.loadEvents()
-	var events = eventLoader.events
+	var events = LocationEventLoader.events
 	var home = getNode(0,0,0)
 	var otherEvents = []
-	for event in eventLoader.events:
+	for event in events:
 		if(event == "Home"):
 			home.event = events[event]
 		else:
