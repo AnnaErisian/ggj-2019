@@ -39,6 +39,6 @@ func initChar(party, node, player):
 		skill.xp = 100
 	if player:
 		for skill in SkillLoader.skills:
-			if !(skill in skills):
+			if !(skill in skills) and skill != "Leadership":
 				character.skills.append(SkillLoader.newSkill(skill))
 	party.setActive(character)
