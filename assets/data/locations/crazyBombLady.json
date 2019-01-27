@@ -9,7 +9,7 @@
     "options":{
         "Venture Inside":{
 	    "checks":{
-		"SPEC-NINPARTY-Crazy Explosives Lady": 1
+		"SPEC-NINPARTY-Crazy Explosive Lady": 1
 	    },
 	    "success":{
 		"event": "Inside the Noisy Cave"
@@ -54,7 +54,7 @@
 	},
         "SNEAK UP TO IT": {
 	    "checks": {
-                "stealth": 6
+                "stealth": 3
 	    },
 	    "success": {
 		"event": "Barely Caught By The Golem",
@@ -125,10 +125,10 @@
         "Accept, against your better judgement.":{
 	    "checks":{},
 	    "success":{
-		"text": "Crazy Explosion Lady joins your party",
+		"text": "Crazy Explosive Lady joins your party",
 		"join": {
-		    "name": "Crazy Explosion Lady",
-		    "skills": {"combat": 6, "magic": 3},
+		    "name": "Crazy Explosive Lady",
+		    "skills": {"fighting": 6, "magic": 3},
 		    "initialBond": 0,
 		    "immediatelyActive": 1
 		}
@@ -137,5 +137,37 @@
 	}
     }
 },
+"Visit Crazy Explosives Lady's Cave":{
+    "internal": true,
+    "name": "Visit Crazy Explosives Lady's Cave",
+    "description": "She's happy to travel with you.  Happy? Maybe. Hard to tell",
+    "time": 2,
+    "options":{
+        "Take The Crazy Explosive Lady With You": {
+	    "checks": {
+                "SPEC-CANACTIVATE-Crazy Explosive Lady": 1
+	    },
+	    "success": {
+		"text": "The Crazy Explosive Lady joins you on your journey",
+		"activate-Crazy Explosive Lady": 1
+	    },
+	    "failure": {
+		"text": "The Crazy Explosive Lady cannot join you (He may be busy, or he may be with you already.)"
+	    }
+	},
+	"Leave The Crazy Explosive Lady Here": {
+	    "checks": {
+		 "SPEC-ACTIVE-Crazy Explosive Lady": 1
+	    },
+	    "success":{
+		"text": "The Crazy Explosive Lady will wait angrily.",
+		"deactivate-Crazy Explosive Lady": 1
+	    },
+	    "failure":{
+		"text": "The Crazy Explosive Lady is not traveling with you currently"
+	    }
+	}
+    }
 
+}
 }
