@@ -81,6 +81,134 @@
         }
     }
 },
+"Lone Monster":{
+    "name": "Lone Monster",
+    "description": "You come across a single monster, separated from his horde.",
+    "time": 1,
+    "color": "#cd7a1a",
+    "options":{
+        "Sneak Past":{
+            "checks":{
+                "stealth": 1
+            },
+            "success":{
+                "text": "You successfully sneak past the camp.",
+                "xp-stealth": 5
+            },
+            "failure":{
+                "text": "The monster spots you and chases you off, pursuing you for some time.",
+                "time": 2
+            }
+        },
+        "Fight":{
+            "checks":{
+                "fighting": 1
+            },
+            "success":{
+                "text": "You give the monster a beating they won't soon forget.",
+                "time": 1,
+                "relationship": 1,
+                "xp-fighting": 5,
+                "additem-monster parts": 2,
+                "additem-gold": 2
+            },
+            "failure":{
+                "text": "The monster proves to be too strong and beats you back.  You need to drop a few things to make your escape.",
+                "time": 2,
+                "xp-fighting": 2,
+                "additem-raw wood": -1,
+                "additem-meat": -1,
+                "additem-grains": -1,
+                "additem-ore": -1
+            }
+        },
+        "Do Not Engage":{
+            "checks":{
+            },
+            "success":{
+                "text": "You decide not to trifle with the monster and give him plenty of space.",
+                "time": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
+"Grassland":{
+    "name": "Grassland",
+    "description": "An empty, rolling grassland stretches out before you.",
+    "time": 1,
+    "color": "#63f64a",
+    "options":{
+        "Admire the Scenery":{
+            "checks":{
+            },
+            "success":{
+                "text": "You take a moment to take in your surroundings.",
+                "time": 2,
+                "relationship": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Continue Onward":{
+            "checks":{
+            },
+            "success":{
+                "text": "You proceed without further delay."
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
+"Cornfield":{
+    "name": "Cornfield",
+    "description": "An expanse of wild corn stretches out before you.",
+    "time": 1,
+    "color": "#e5d926",
+    "options":{
+        "Admire the Scenery":{
+            "checks":{
+            },
+            "success":{
+                "text": "You take a moment to take in your surroundings.",
+                "time": 2,
+                "relationship": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Gather Some Corn":{
+            "checks":{
+                "farming": 1
+            },
+            "success":{
+                "text": "You find some corn good enough for the taking.",
+                "time": 2,
+                "additem-grains": 2
+            },
+            "failure":{
+                "text": "You don't seem to find any corn good enough to take with you",
+                "time": 2
+            }
+        },
+        "Continue Onward":{
+            "checks":{
+            },
+            "success":{
+                "text": "You proceed without further delay."
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+},
 "Mountain Path":{
     "name": "Mountain Path",
     "description": "You encounter a path that leads around the mountain towering before you.",
