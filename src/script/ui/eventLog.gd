@@ -11,4 +11,4 @@ func write(entry):
 	if get_item_count() >= maxLength:
 			remove_item(0)
 	add_item(entry, null, false)
-	print("debug - " + entry)
+	print("Debug - " + entry)
