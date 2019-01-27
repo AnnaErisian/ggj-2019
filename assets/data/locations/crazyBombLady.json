@@ -1,0 +1,141 @@
+{
+"Cave of Pandemonium":{
+    "name": "Cave of Pandemonium",
+    "description": "Cacophonous noise echoes from an otherwise hidden cavern.  You cannot see within.",
+    "time": 1,
+    "type": "personage",
+    "color": "#220000",
+    "immediate": 1,
+    "options":{
+        "Venture Inside":{
+	    "checks":{
+		"SPEC-NINPARTY-Crazy Explosives Lady": 1
+	    },
+	    "success":{
+		"event": "Inside the Noisy Cave"
+	    },
+	    "failure":{
+		"event": "Visit Crazy Explosives Lady's Cave"
+	    }
+        },
+        "Leave quickly and quietly":{
+            "checks":{
+                "stealth": 2
+            },
+            "success":{
+                "text": "You leave with impressive stealth, though it seems unnecessary.",
+                "xp-stealth": 10
+            },
+            "failure":{
+                "text": "You leave, stomping and shouting, but nobody can hear a thing regardless.",
+                "xp-stealth": 4
+            }
+        },
+    }
+},
+"Inside the Noisy Cave":{
+    "internal": true,
+    "name": "Inside the Noisy Cave",
+    "description": "YOU MOVE INTO THE CAVE.  YOU THINK YOU SEE A LIGHT FURTHER INSIDE.  IT IS RED.",
+    "time": 4,
+    "options":{
+        "CHARGE IT": {
+	    "checks": {
+                "combat": 6
+	    },
+	    "success": {
+		"event": "Barely Bested By The Golem",
+		"xp-combat": 30
+	    },
+	    "failure": {
+		"text": "As you approach, you realize you've charged a Golem.  You know your strength is wildly insufficient, and so you fall back and stay alive",
+		"xp-combat": 5
+	    }
+	},
+        "SNEAK UP TO IT": {
+	    "checks": {
+                "stealth": 6
+	    },
+	    "success": {
+		"event": "Barely Caught By The Golem",
+		"xp-stealth": 30
+	    },
+	    "failure": {
+		"text": "You barely step forward when the light turns to face you and begins pulsing.  You leg it out of the cave.",
+		"xp-stealth": 5
+	    }
+	},
+	"GET OUT OF HERE": {
+	
+	    "checks": {
+                "stealth": 1
+	    },
+	    "success": {
+		"text": "You sneak out of the cave unnoticed."
+	    },
+	    "failure": {
+		"text": "You leg it out of the cave, pursued by something you can't see."
+	    }
+	}
+    }
+},
+"Barely Bested By The Golem":{
+    "internal": true,
+    "name": "Barely Bested By The Golem",
+    "description": "You almost take the golem down, but an explosion interrupts you, knocking you out.  When you awake, a lady with crispy hair stands over you with a powder grenade.",
+    "time": 15,
+    "options":{
+	"Hear her out": {
+	    "checks": {
+	    },
+	    "success": {
+		"event": "Joined by Crazy Explosive Lady"
+	    },
+	    "failure": {
+		"text": "ERROR."
+	    }
+	}
+    }
+},
+
+"Barely Caught By The Golem":{
+    "internal": true,
+    "name": "Barely Caught By The Golem",
+    "description": "You almost sneak around the back of the cave, but an explosion interrupts you, knocking you out.  When you awake, a lady with crispy hair stands over you with a powder grenade.",
+    "time": 15,
+    "options":{
+	"Hear her out": {
+	    "checks": {
+	    },
+	    "success": {
+		"event": "Joined by Crazy Explosive Lady"
+	    },
+	    "failure": {
+		"text": "ERROR."
+	    }
+	}
+    }
+},
+"Joined by Crazy Explosive Lady":{
+    "internal": true,
+    "name": "Joined by Crazy Explosive Lady",
+    "description": "You realize you don't have a choice in the matter.  The madwoman demands to join your party, and shifts the grenade to explain that you don't have a choice.",
+    "time": 0,
+    "options":{
+        "Accept, against your better judgement.":{
+	    "checks":{},
+	    "success":{
+		"text": "Crazy Explosion Lady joins your party",
+		"join": {
+		    "name": "Crazy Explosion Lady",
+		    "skills": {"combat": 6, "magic": 3},
+		    "initialBond": 0,
+		    "immediatelyActive": 1
+		}
+	    },
+	    "failure":{}
+	}
+    }
+},
+
+}

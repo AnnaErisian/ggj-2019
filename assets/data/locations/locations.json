@@ -73,6 +73,7 @@
     "name": "Dense Forest",
     "description": "You come across a large mass of tree and bark, almost creating a wall.  Locals tell of an old wizard living around here.",
     "time": 3,
+    "color": "#237711",
     "options":{
         "Walk Around":{
             "checks":{
@@ -195,7 +196,7 @@
     "name": "Dense forest",
     "description": "You come across a large mass of tree and bark, almost creating a wall.  Locals tell of an old wizard living around here.",
     "time": 3,
-    "color": "#237711",
+    "color": "#230011",
     "type": "personage",
     "options":{
         "Walk Around":{

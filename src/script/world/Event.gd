@@ -131,7 +131,10 @@ class event:
 		
 	func addItems(name, number):
 		Logger.write("Gained %d %s" % [number, name])
-		MainData.party.addItems(name,number)
+		if(number<0):
+			removeItems(name,number*-1)
+		else:
+			MainData.party.addItems(name,number)
 		
 	func removeItems(name, number):
 		Logger.write("Lost %d %s" % [number,name])

@@ -94,7 +94,7 @@ func placeEvents():
 	#place immediate events
 	var nearSpots = home.directLinkedNodes.duplicate()
 	for loc in immediateEvents:
-		nearSpots.pop().setLocationEvent(loc)
+		nearSpots.pop_front().setLocationEvent(loc)
 	while uniqueEvents.size() > 0:
 		var potentialLoc = locations[randi()%locations.size()]
 		if(potentialLoc.event == null):

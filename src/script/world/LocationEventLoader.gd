@@ -26,6 +26,7 @@ func parseEvent(event):
 	eventToAdd.internal = event.has("internal")
 	eventToAdd.eventColor = Color(event["color"]) if event.has("color") else Color("#999999")
 	eventToAdd.eventType = event["type"] if event.has("type") else "wilderness"
+	eventToAdd.eventImmediate = event["immediate"] if event.has("immediate") else false
 	
 	events[eventToAdd.name] = eventToAdd
 

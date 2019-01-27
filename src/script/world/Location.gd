@@ -89,14 +89,9 @@ func setupPolygon():
 				points[k] = new_point
 				points.remove(j)
 				break
-	var avgdist = 0
 	for i in range(points.size()):
-		points[i] *= 0.5
-		avgdist+= points[i].length()
-	avgdist /= neighbors.size()+1
-	for i in range(points.size()):
-		if points[i].length() > avgdist:
-			points[i] = points[i].normalized() * avgdist
+		if points[i].length() > 120:
+			points[i] = points[i].normalized() * 60
 		
 	$Visual.polygon = points
 	if points.size() == 6:
