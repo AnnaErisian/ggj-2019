@@ -4,6 +4,7 @@
     "description": "The comfort of home fills you with the strength of hope.",
     "time": 0,
     "color": "#ffffff",
+    "type": "home",
     "options":{
         "Continue":{
             "checks":{
@@ -23,6 +24,110 @@
     "description": "Trees rise up around you.",
     "time": 1,
     "color": "#338844",
+    "options":{
+        "Pass through":{
+            "checks":{
+            },
+            "success":{
+                "text": "You pass through the forest with the safety of the beaten path"
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Gather Lumber":{
+            "checks":{
+                "forestry": 2
+            },
+            "success":{
+                "text": "You gather some lumber and gain familiarity with this forest.",
+                "relationship": 1,
+                "xp-forestry": 3,
+                "xp-pathfinding": 1,
+                "additem-raw wood": 3
+            },
+            "failure":{
+                "text": "You cannot find anything worth gathering, and end up spending too long looking.",
+                "time": 2
+            }
+        },
+        "Hunt Wildlife":{
+            "checks":{
+                "hunting": 2
+            },
+            "success":{
+                "text": "You catch some small game and gain familiarity with this forest.",
+                "relationship": 1,
+                "xp-hunting": 3,
+                "xp-pathfinding": 1,
+                "additem-meat": 3
+            },
+            "failure":{
+                "text": "You cannot find anything worth hunting, and end up spending too long looking.",
+                "time": 2
+            }
+        }
+    }
+},
+"Dense Forest":{
+    "name": "Dense Forest",
+    "description": "You come across a large mass of tree and bark, almost creating a wall.  Locals tell of an old wizard living around here.",
+    "time": 3,
+    "options":{
+        "Walk Around":{
+            "checks":{
+            },
+            "success":{
+                "text": "You skirt the edge of the forest with relative ease",
+                "time": 2
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Gather Lumber":{
+            "checks":{
+                "forestry": 1,
+                "pathfinding": 1
+            },
+            "success":{
+                "text": "You gather some lumber and gain familiarity with this forest.",
+                "relationship": 1,
+                "xp-forestry": 2,
+                "xp-pathfinding": 2,
+                "additem-raw wood": 3,
+                "time": 1
+            },
+            "failure":{
+                "text": "You cannot find anything worth gathering, and end up spending too long looking.",
+                "time": 2
+            }
+        },
+        "Push Through":{
+            "checks":{
+                "forestry": 2,
+                "pathfinding": 2
+            },
+            "success":{
+                "text": "You hack your way through, gaining some lumber and familiarity with this forest.",
+                "relationship": 1,
+                "xp-forestry": 1,
+                "xp-pathfinding": 4,
+                "additem-raw wood": 1
+            },
+            "failure":{
+                "text": "You try to chop through the woods, but the forest appears too tough and you must turn around.",
+                "time": 4
+            }
+        }
+    }
+},
+"Forest path":{
+    "name": "Forest path",
+    "description": "Trees rise up around you.",
+    "time": 1,
+    "type": "personage",
+    "color": "#33FF44",
     "options":{
         "Pass through":{
             "checks":{
@@ -86,11 +191,12 @@
 	}
     }
 },
-"Dense Forest":{
-    "name": "Dense Forest",
+"Dense forest":{
+    "name": "Dense forest",
     "description": "You come across a large mass of tree and bark, almost creating a wall.  Locals tell of an old wizard living around here.",
     "time": 3,
     "color": "#237711",
+    "type": "personage",
     "options":{
         "Walk Around":{
             "checks":{
@@ -138,20 +244,20 @@
                 "time": 4
             }
         },
-	    "Seek the old wizard":{
-	        "checks":{
-		        "forestry": 1,
-                "magic": 2,
-                "pathfinding": 2
-	        },
-	        "success":{
-    		    "event": "Encounter With the Wizard"
-	        },
-	        "failure":{
-		        "text": "After tireless searching, you cannot find the wizard.  Perhaps he doesn't want to be found, or perhaps he doesn't exist at all.",
-                "time": 10
-	        }
-	    }
+        "Seek the old wizard":{
+           "checks":{
+               "forestry": 1,
+               "magic": 2,
+               "pathfinding": 2
+           },
+           "success":{
+               "event": "Encounter With the Wizard"
+           },
+           "failure":{
+               "text": "After tireless searching, you cannot find the wizard.  Perhaps he doesn't want to be found, or perhaps he doesn't exist at all.",
+               "time": 10
+           }
+        }
     }
 },
 "Encounter With the Wizard":{
@@ -265,10 +371,10 @@
 
 },
 "Flower Grove": {
-    "internal": true,
     "name": "Flower Grove",
     "description": "A field of highly deadly deadly nighshadestretches before you",
     "time": 3,
+    "color": "#662277",
     "options": {
 	"Take a flower": {
 	    "checks":{},

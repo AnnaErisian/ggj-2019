@@ -1,0 +1,32 @@
+{
+"Gorgeous Lake": {
+    "name": "Gorgeous Lake",
+    "description": "Crystal blue watter sparkles to the horizon",
+    "time": 1,
+    "color": "#338844",
+    "options":{
+        "Go for a swim":{
+            "checks":{
+            },
+            "success":{
+                "text": "You are refreshed",
+		"relationship": 20,
+		"time": 8
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        },
+        "Pass by":{
+            "checks":{
+            },
+            "success":{
+                "text": "You pass by the lake - it's tempting to dive in, but there's no time",
+            },
+            "failure":{
+                "text": "ERROR"
+            }
+        }
+    }
+}
+}

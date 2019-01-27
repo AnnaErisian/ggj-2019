@@ -2,7 +2,7 @@ extends Node2D
 
 var directLinkedNodes = []
 var softLinkedNodes = []
-var event
+var event = null
 var visited = false
 	
 var preparedPoly = false
@@ -27,6 +27,7 @@ func _ready():
 
 const white = Color("#FFFFFF")
 func _draw():
+	print("Eventtype %s" % event.eventType)
 	if event.eventType != "wilderness" and visited:
 		draw_circle(Vector2(0,0),20,white)
 		draw_circle(Vector2(0,0),16,$Visual.color)

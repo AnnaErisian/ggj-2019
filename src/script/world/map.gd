@@ -76,16 +76,32 @@ func alterLinks():
 func placeEvents():
 	var events = LocationEventLoader.events
 	var home = getNode(0,0,0)
-	var otherEvents = []
+	var immediateEvents = []
+	var uniqueEvents = []
+	var wildernessEvents = []
 	for event in events:
 		if(event == "Home"):
 			home.setLocationEvent(events[event])
+			home.visited = true
 		else:
-			if(!events[event].internal):
-				otherEvents.append(events[event])
+			if events[event].eventImmediate:
+				immediateEvents.append(events[event])
+			elif(!events[event].internal):
+				if events[event].eventType == "wilderness":
+					wildernessEvents.append(events[event])
+				else:
+					uniqueEvents.append(events[event])
+	#place immediate events
+	var nearSpots = home.directLinkedNodes.duplicate()
+	for loc in immediateEvents:
+		nearSpots.pop().setLocationEvent(loc)
+	while uniqueEvents.size() > 0:
+		var potentialLoc = locations[randi()%locations.size()]
+		if(potentialLoc.event == null):
+			potentialLoc.setLocationEvent(uniqueEvents.pop_front())
 	for loc in locations:
-		if(loc != home):
-			loc.setLocationEvent(otherEvents[randi()%otherEvents.size()])
+		if(loc.event == null):
+			loc.setLocationEvent(wildernessEvents[randi()%wildernessEvents.size()])
 
 func finalizeLocations():
 	for loc in locations:
