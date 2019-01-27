@@ -40,7 +40,7 @@ func loadCharacterData(chr):
 		addRequestPoint((schedule.requestedTime.endTime - MainData.currTime)*OBLIGATION_SCALE)
 
 func createVerticalLines():
-	var currX = OBLIGATION_SCALE * 24
+	var currX = OBLIGATION_SCALE * (24 - MainData.currTime)
 	while currX < MAX_WIDTH:
 		var startPoint = Vector2(currX, 0)
 		var endPoint = Vector2(currX, 100)
@@ -92,8 +92,8 @@ func submitRequest():
 	var request = Obligation.obligation.new(min(requestTime1, requestTime2), max(requestTime1, requestTime2))
 	var result = schedule.requestTime(request, character.bondLevel())
 	
-	
-	
+func _process(delta):
+	get_node("name").rect_position.x = get_parent().get_parent().scroll_horizontal
 	
 	
 	

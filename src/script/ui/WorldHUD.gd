@@ -23,9 +23,9 @@ func _ready():
 	
 	player.schedule = Schedule.schedule.new()
 	var obsToAdd = []
-	obsToAdd.append(Obligation.obligation.new(1, 100))
+	obsToAdd.append(Obligation.obligation.new(50, 100))
 	obsToAdd.append(Obligation.obligation.new(7, 10))
-	obsToAdd.append(Obligation.obligation.new(25, 40))
+	obsToAdd.append(Obligation.obligation.new(270, 295))
 	obsToAdd.append(Obligation.obligation.new(200, 250))
 	obsToAdd.append(Obligation.obligation.new(6, 8))
 	
