@@ -33,7 +33,8 @@ func _ready():
 		player.schedule.addObligation(obs)
 	
 	
-	party = Party.party.new([player, char1, char2])
+	party = Party.party.new([char2, player, char1])
+	party.player = player
 	MainData.party = party
 	
 	get_node("lists/partyList").loadParty()
