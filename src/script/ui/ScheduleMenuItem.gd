@@ -9,6 +9,7 @@ const MAX_WIDTH = 2000
 
 var requestPoint1
 var requestPoint2
+var requestStartPointLine
 var requestLine
 var character
 var schedule
@@ -73,7 +74,18 @@ func addRequestPoint(x):
 		requestLine = null
 		requestPoint2 = null
 		requestPoint1 = Vector2(x - (int(x) % 5), REQUEST_HEIGHT)
+		
+		requestStartPointLine = Line2D.new()
+		requestStartPointLine.add_point(requestPoint1)
+		requestStartPointLine.add_point(Vector2(requestPoint1.x+1, requestPoint1.y))
+		requestStartPointLine.default_color = Color(0, 256, 0)
+		requestStartPointLine.width = 10
+		requestStartPointLine.begin_cap_mode = requestStartPointLine.LINE_CAP_ROUND
+		requestStartPointLine.end_cap_mode = requestStartPointLine.LINE_CAP_ROUND
+		add_child(requestStartPointLine)
 	else:
+		remove_child(requestStartPointLine)
+		requestStartPointLine = null
 		requestPoint2 = Vector2(x - (int(x) % 5), REQUEST_HEIGHT)
 		requestLine = Line2D.new()
 		requestLine.add_point(requestPoint1)
