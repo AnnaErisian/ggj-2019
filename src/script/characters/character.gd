@@ -90,7 +90,7 @@ class character:
 	# Checks to see if the character is available at the current time.
 	# Returns true if the character has no conflict in the next unit
 	# of time and false otherwise.
-	func isAvailable(time):
+	func isAvailable(time=MainData.currTime):
 		var ob = Obligation.obligation.new(time, time + 1)
 		var conflict = {}
 		schedule.addConflicts(conflict, ob)
