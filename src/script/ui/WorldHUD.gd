@@ -6,8 +6,6 @@ const Skill = preload("res://src/script/characters/skill.gd")
 
 
 
-
-
 var player
 var party
 
@@ -28,6 +26,5 @@ func _ready():
 	get_node("currTime").text = str(get_tree().get_root().get_node("Main").get_node("MainData").currTime)
 
 func on_timeUpdated():
-	get_node("EventLog").writeLogEntry("Log entry at time = " + str(get_tree().get_root().get_node("Main").get_node("MainData").currTime))
 	get_node("currTime").text = str(get_tree().get_root().get_node("Main").get_node("MainData").currTime)
 	

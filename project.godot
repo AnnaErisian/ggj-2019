@@ -14,6 +14,10 @@ config/name="Journey of the Soul"
 run/main_scene="res://src/scene/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Logger="*res://src/script/Logger.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
