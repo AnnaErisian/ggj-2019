@@ -2,11 +2,10 @@ extends ItemList
 
 const TOTAL_WIDTH = 15
 
-# params: Party party
-func loadSkills(party):
+func loadSkills():
 	add_item("Skill Totals:", null, false)
 	
-	var activeSkills = party.skillTotals()
+	var activeSkills = MainData.party.skillTotals()
 	
 	for skillName in activeSkills.keys():
 		var skillNameLength = skillName.length()
