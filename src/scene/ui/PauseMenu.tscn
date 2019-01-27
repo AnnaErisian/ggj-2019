@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/script/ui/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/VeraMono.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/script/ui/ExitToMain.gd" type="Script" id=3]
-[ext_resource path="res://src/script/ui/ReturnToGame.gd" type="Script" id=4]
+[ext_resource path="res://src/script/ui/RemoveFromParty.gd" type="Script" id=4]
+[ext_resource path="res://src/script/ui/ReturnToGame.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -226,6 +227,7 @@ group = null
 text = "Remove from Party"
 flat = false
 align = 1
+script = ExtResource( 4 )
 _sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
 [node name="AddToParty" type="Button" parent="." index="5"]
@@ -382,7 +384,7 @@ group = null
 text = "Return to Game"
 flat = false
 align = 1
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "custom_fonts" ]
 
 

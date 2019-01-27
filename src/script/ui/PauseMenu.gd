@@ -12,7 +12,6 @@ func loadLists():
 	
 	# Loads active party
 	for member in MainData.party.active:
-		Logger.write(member.name)
 		var listStr = member.name + " - " + "Bond: " + str(member.bondLevel()) + " - "
 		var skillStr = ""
 		var index = 0
@@ -26,7 +25,6 @@ func loadLists():
 		
 	# Loads inactive party
 	for member in MainData.party.inactive:
-		Logger.write(member.name)
 		var listStr = member.name + " - " + "Bond: " + str(member.bondLevel()) + " - "
 		var skillStr = ""
 		var index = 0
@@ -45,6 +43,7 @@ func loadLists():
 func setInactive():
 	var active = get_node("ActiveParty")
 	var selectedMember = active.get_selected_items()
-
-	
-	
+	if selectedMember.size() == 1:
+		var character = MainData.party.active[selectedMember[0]]
+		MainData.party.setInactive(character)
+		loadLists()
