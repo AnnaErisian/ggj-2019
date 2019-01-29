@@ -2,6 +2,8 @@
 
 ## Created during Global Game Jam 2019
 
+## [**Play Now**](https://sigmaj.github.io/ggj-2019/build/Journey%20of%20the%20Soul.html)
+
 A game about making your way in a fantastic realm with your family.  Explore the wilds, encounter fantastic beasts, and meet new friends along the way.
 
 In reality, more of an engine - locations (among other things) are defined in JSON files, enabling intense customization
