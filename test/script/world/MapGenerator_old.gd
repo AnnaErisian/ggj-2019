@@ -2,28 +2,36 @@ extends Node
 
 export(PackedScene) var location_node
 
-const WORLD_RADIUS = 40
+const WORLD_RADIUS = 400
 const WORLD_DIAMETER = WORLD_RADIUS*2
-const WORLD_NODE_COUNT = 5
+const WORLD_NODE_COUNT = 50
 
 var locations = []
+var unprocessedLocations = []
+var hexgrid = {}
 
-var unaddedLocations = []
-var fakeNodes = []
-var triDag = []
+var fakeTri
+var triangulation
 
 # @param: position Vector2
-func addLoc(position):
+func addLoc(position, locname):
 	var new_loc = location_node.instance()
 	add_child(new_loc)
 	locations.append(new_loc)
+	unprocessedLocations.append(new_loc)
 	new_loc.position = position
 	new_loc.position += Vector2(WORLD_RADIUS*3.1,WORLD_RADIUS*3.1)
+	new_loc.id = locname
 	return new_loc
 
 func createLocations():
 	for i in range(WORLD_NODE_COUNT):
-		addLoc(Vector2(0, WORLD_RADIUS*pow(randf(),1.0)).rotated(2*PI*randf()))
+		addLoc(Vector2(0, WORLD_RADIUS*pow(randf(),1.0)).rotated(2*PI*randf()), str(i))
+#	addLoc(Vector2(WORLD_RADIUS, 0), "A")
+#	addLoc(Vector2(-0.5*WORLD_RADIUS, WORLD_RADIUS), "C")
+#	addLoc(Vector2(-0.5*WORLD_RADIUS, -1*WORLD_RADIUS), "D")
+#	addLoc(Vector2(-100, -250), "B")
+#	addLoc(Vector2(0, 180), "E")
 
 func relaxLocations(iterations):
 	for iter in range(iterations):
@@ -38,26 +46,72 @@ func relaxLocations(iterations):
 			loc.position += (loc.position - closest.position).normalized()*3
 
 func connectLocations():
-	#DOESN'T WORK, CAN'T FIGURE OUT WHY
-	delaunayTriangulate()
+	var triangulation = BowyerWatson()
+	for triangle in triangulation:
+		triangle.linkNodes()
 
 func _ready():
 	randomize()
 	createLocations()
 	relaxLocations(4)
-	connectLocations()
-	relaxLocationsAngular(1)
-	#alterConnections()
+	
+	var fakeNodes = createFakeExternalNodes()
+	fakeTri = Triangle.new(fakeNodes[0], fakeNodes[1], fakeNodes[2])
+	triangulation = [fakeTri]
+#	connectLocations()
+	placeEvents()
+	for l in locations:
+		l.setColor(Color("#FFFFFF"))
+
+var counter = 0
+var delay = 10
+
+func _process(delta):
+	counter += 1
+	if counter > delay:
+		counter -= delay
+		if(unprocessedLocations.size()>0):
+			var nextLoc = unprocessedLocations.pop_back()
+			BWiteration(triangulation, nextLoc)
+			nextLoc.setColor(Color("#FF0000"))
 
 
-class DelaunayTriNode:
+func placeEvents():
+	var events = LocationEventLoader.events
+	var home = locations[randi()%locations.size()]
+	var immediateEvents = []
+	var uniqueEvents = []
+	var wildernessEvents = []
+	for event in events:
+		if(event == "Home"):
+			home.setLocationEvent(events[event])
+			home.visited = true
+		else:
+			if events[event].eventImmediate:
+				immediateEvents.append(events[event])
+			elif(!events[event].internal):
+				if events[event].eventType == "wilderness":
+					wildernessEvents.append(events[event])
+				else:
+					uniqueEvents.append(events[event])
+	#place immediate events
+	var nearSpots = home.directLinkedNodes.duplicate()
+	for loc in immediateEvents:
+		nearSpots.pop_front().setLocationEvent(loc)
+#	while uniqueEvents.size() > 0:
+#		var potentialLoc = locations[randi()%locations.size()]
+#		if(potentialLoc.event == null):
+#			potentialLoc.setLocationEvent(uniqueEvents.pop_front())
+	for loc in locations:
+		if(loc.event == null):
+			loc.setLocationEvent(wildernessEvents[randi()%wildernessEvents.size()])
+
+class Triangle:
 	var nodes = []
-	var children = []
-	var old = false
 	
 	func _init(a,b,c):
-		#if points ccw
-		if (b.position.x-a.position.x)*(c.position.y-a.position.y)-(c.position.x-a.position.x)*(b.position.y-a.position.y)>0 :
+		
+		if det3(a.position.x, a.position.y, 1, b.position.x, b.position.y, 1, c.position.x, c.position.y, 1) > 0 :
 			nodes = [a,b,c]
 		else: 
 			nodes = [b,a,c]
@@ -74,54 +128,10 @@ class DelaunayTriNode:
 		var has_pos = s1>0 or s2>0 or s3>0
 		return !(has_neg and has_pos)
 	
-	func findContaining(point):
-		var x = findContaining_internal(point)
-		#print("FC" + str(x.nodes))
-		return x
-	
-	func findContaining_internal(point):
-		var candidates = []
-		for child in children:
-			if(child.contains(point)):
-				candidates.append(child)
-		if(candidates.empty()):
-			if(old):
-				return false
-			else:
-				return self
-		for child in candidates:
-			var rv = child.findContaining_internal(point)
-			if typeof(rv) == TYPE_OBJECT:
-				return rv
-		return false
-			
-	
-	func findLiveTri(a,b,c):
-		var x = findLiveTri_internal(a,b,c)
-		#print(x)
-		return x
-
-
-	func findLiveTri_internal(a,b,c):
-		if equalNodes(a,b,c) and !old:
-			return self
-		for child in children:
-			var r = child.findLiveTri_internal(a,b,c)
-			if r:
-				return r
-			else:
-				pass#print("A")
-		return false
+	func sharesNode(otherTri):
+		return nodes.has(otherTri.nodes[0]) ||  nodes.has(otherTri.nodes[1]) || nodes.has(otherTri.nodes[2])
 	
 	func equalNodes(a,b,c):
-		if false:
-			print("eqnodes")
-			print(nodes[0])
-			print(nodes[1])
-			print(nodes[2])
-			print(a)
-			print(b)
-			print(c)
 		var x = nodes.has(a) and nodes.has(b) and nodes.has(c)
 		#print(x)
 		return x
@@ -129,44 +139,87 @@ class DelaunayTriNode:
 	func side(p,a,b):
 		return (p.x-b.x)*(a.y-b.y) - (a.x-b.x)*(p.y-b.y)
 	
-	func printMe(n):
-		var s = "Tri: %s, %s" % [nodes, old]
-		for i in range(n):
-			s = "  " + s
-		print(s)
-		for child in children:
-			child.printMe(n+1)
+	func printMe():
+		var s = "Tri: %s" % [nodes]
+	
+	func inCircumcircle(otherloc):
+		return _inCircle(nodes[0].position,nodes[1].position,nodes[2].position,otherloc.position)
+	
+	func linkNodes():
+		nodes[0].link(nodes[1])
+		nodes[1].link(nodes[2])
+		nodes[2].link(nodes[0])
+	
+	func edges():
+		return [[nodes[0],nodes[1]],[nodes[1],nodes[2]],[nodes[2],nodes[0]]]
+	
+	func _inCircle(a,b,c,d):
+		#print("InCirlce(%s, %s, %s, %s)" % [a,b,c,d])
+		var det = det4(a.x,a.y,(a.x*a.x+a.y*a.y),1, b.x,b.y,(b.x*b.x+b.y*b.y),1, c.x,c.y,(c.x*c.x+c.y*c.y),1, d.x,d.y,(d.x*d.x+d.y*d.y),1)
+		return det > 0
+	
+	func det4(a,b,c,d, e,f,g,h, i,j,k,l, m,n,o,p):
+		var det = a*det3(f,g,h,j,k,l,n,o,p)-b*det3(e,g,h,i,k,l,m,o,p)+c*det3(e,f,h,i,j,l,m,n,p)-d*det3(e,f,g,i,j,k,m,n,o)
+		#print("Determinant4: " + str(det))
+		return det
+	
+	func det3(a,b,c,d,e,f,g,h,i):
+		return a*det2(e,f,h,i)-b*det2(d,f,g,i)+c*det2(d,e,g,h)
+	
+	func det2(a,b,c,d):
+		return a*d-b*c
 
-func delaunayTriangulate():
-	unaddedLocations = locations.duplicate()
-	fakeNodes = createFakeExernalNodes()
-	triDag = DelaunayTriNode.new(fakeNodes[0],fakeNodes[1],fakeNodes[2])
-	while(unaddedLocations.size() > 0):
-		var index = randi()%unaddedLocations.size()
-		var location = unaddedLocations[index]
-		unaddedLocations.remove(index)
-		#print(location.position)
-		#We are assuming the point never lands on an edge
-		var parent = triDag.findContaining(location)
-		#print(parent.nodes[0].position)
-		parent.old = true
-		var t1 = DelaunayTriNode.new(parent.nodes[0], parent.nodes[1], location)
-		var t2 = DelaunayTriNode.new(parent.nodes[1], parent.nodes[2], location)
-		var t3 = DelaunayTriNode.new(parent.nodes[2], parent.nodes[0], location)
-		parent.children.append(t1)
-		parent.children.append(t2)
-		parent.children.append(t3)
-		location.link(parent.nodes[0])
-		location.link(parent.nodes[1])
-		location.link(parent.nodes[2])
-		validEdge(t1,location,triDag)
-		validEdge(t2,location,triDag)
-		validEdge(t3,location,triDag)
-	for n in fakeNodes:
-		n.destroySelf()
-	#triDag.printMe(0)
+#func BowyerWatson():
+#	for triangle in triangulation: #done inserting points, now clean up
+#		if triangle.sharesNode(fakeTri):
+#			triangulation.erase(triangle)
+#	return triangulation
 
-func createFakeExernalNodes():
+func BWiteration(triangulation, node):
+	var badTriangles = []
+	for triangle in triangulation: # first find all the triangles that are no longer valid due to the insertion
+		if triangle.inCircumcircle(node): #point is inside circumcircle of triangle
+			badTriangles.append(triangle)
+	var polygon = []
+	for triangle in badTriangles: # find the boundary of the polygonal hole
+		for edge in triangle.edges():
+			if polygonContainsEdge(polygon, edge):# edge is not shared by any other triangles in badTriangles
+				polygon.erase(edge)
+				polygon.erase([edge[1],edge[0]])
+			else:
+				polygon.append(edge)
+	print("BT size: %s, P size: %s" % [badTriangles.size(), polygon.size()])
+	for triangle in badTriangles: #remove them from the data structure
+		triangulation.erase(triangle)
+		unlinkTriangle(triangle)
+	for edge in polygon: #re-triangulate the polygonal hole
+		var newTri = Triangle.new(edge[0],edge[1],node) #form a triangle from edge to point
+		triangulation.append(newTri)
+		linkTriangle(newTri)
+
+func unlinkTriangle(t):
+	t.nodes[0].unlink(t.nodes[1])
+	t.nodes[1].unlink(t.nodes[2])
+	t.nodes[2].unlink(t.nodes[0])
+	t.nodes[0].updateAll()
+	t.nodes[1].updateAll()
+	t.nodes[2].updateAll()
+	
+func linkTriangle(t):
+	t.nodes[0].link(t.nodes[1])
+	t.nodes[1].link(t.nodes[2])
+	t.nodes[2].link(t.nodes[0])
+	t.nodes[0].updateAll()
+	t.nodes[1].updateAll()
+	t.nodes[2].updateAll()
+
+func polygonContainsEdge(poly, e):
+	for ed in poly:
+		if(ed[0]==e[0] && ed[1] == e[1]) or (ed[0]==e[1] && ed[1] == e[0]):
+			return true
+	return false
+
+func createFakeExternalNodes():
 	var maxCoord = 0
 	for l in locations :
 		if(abs(l.position.x) > maxCoord):
@@ -174,86 +227,7 @@ func createFakeExernalNodes():
 			
 		if(abs(l.position.y) > maxCoord):
 			maxCoord = abs(l.position.y)
-	var a = addLoc(Vector2(maxCoord*3,0))
-	var b = addLoc(Vector2(0,maxCoord*3))
-	var c = addLoc(Vector2(maxCoord*-3,maxCoord*-3))
-	a.link(b)
-	b.link(c)
-	c.link(a)
+	var a = addLoc(Vector2(maxCoord*3,0), "Right Dummy")
+	var b = addLoc(Vector2(0,maxCoord*3), "Bottom Dummy")
+	var c = addLoc(Vector2(maxCoord*-3,maxCoord*-3), "Top Left Dummy")
 	return [a,b,c]
-
-func validEdge(triangle,point,root):
-	#print("validEdge")
-	var adjOpTri = adjacentOppositeTriange(triangle,point,root)
-	if adjOpTri:
-		#print("A")
-		if inCircle(adjOpTri.nodes[0].position,adjOpTri.nodes[1].position,adjOpTri.nodes[2].position,point.position):
-			#print("B")
-			flipAndLegalize(triangle,adjOpTri,point,root)
-
-func adjacentOppositeTriange(triangle,point,root):
-	#print("adjacentOppositeTriange")
-	var tri = triangle.nodes.duplicate()
-	tri.erase(point)
-	var a = point
-	var b = tri[0]
-	var c = tri[1]
-	#find point linked to both that is not a
-	for p in b.directLinkedNodes:
-		if p != a and c.directLinkedNodes.has(p):
-			var hit = root.findLiveTri(p,b,c)
-			#print(hit)
-			return hit
-	print("ILLEGAL")
-
-func flipAndLegalize(triangle,adjOpTri,point,root):
-	print("flipAndLegalize")
-	#triangle = abc
-	#aotri = bcd
-	#point = a
-	var a = point
-	#clone so we leave the original arrays alone
-	var tri = triangle.nodes.duplicate()
-	var aotri = adjOpTri.nodes.duplicate()
-	#remove new point from tri, leaving two currently connected points
-	tri.erase(a)
-	var b = tri[0]
-	var c = tri[1]
-	#remove those connected points from the other triangle, leaving the far point
-	aotri.erase(b)
-	aotri.erase(c)
-	var d = aotri[0]
-	#flip the edge
-	b.unlink(c)
-	a.link(d)
-	var nta = DelaunayTriNode.new(a,b,d)
-	var ntb = DelaunayTriNode.new(a,c,d)
-	triangle.children.append(nta)
-	triangle.children.append(ntb)
-	triangle.old = true
-	adjOpTri.children.append(nta)
-	adjOpTri.children.append(ntb)
-	adjOpTri.old = true
-	validEdge(nta,a,root)
-	validEdge(ntb,a,root)
-
-# @param: all Vector2
-func inCircle(a,b,c,d):
-	#print("InCirlce(%s, %s, %s, %s)" % [a,b,c,d])
-	var det = det4(a.x,a.y,(a.x*a.x+a.y*a.y),1, b.x,b.y,(b.x*b.x+b.y*b.y),1, c.x,c.y,(c.x*c.x+c.y*c.y),1, d.x,d.y,(d.x*d.x+d.y*d.y),1)
-	return det > 0
-
-func det4(a,b,c,d, e,f,g,h, i,j,k,l, m,n,o,p):
-	var det = a*det3(f,g,h,j,k,l,n,o,p)-b*det3(e,g,h,i,k,l,m,o,p)+c*det3(e,f,h,i,j,l,m,n,p)-d*det3(e,f,g,i,j,k,m,n,o)
-	#print("Determinant4: " + str(det))
-	return det
-
-func det3(a,b,c,d,e,f,g,h,i):
-	var det = a*det2(e,f,h,i)-b*det2(d,f,g,i)+c*det2(d,e,g,h)
-	#print("Determinant3: " + str(det))
-	return det
-
-func det2(a,b,c,d):
-	var det = a*d-b*c
-	#print("Determinant2 (%d %d %d %d): %d" % [a,b,c,d,det])
-	return det

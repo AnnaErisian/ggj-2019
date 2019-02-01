@@ -15,4 +15,7 @@ func _ready():
 	map.createLocations()
 	map.linkLocations()
 	map.shiftLocations()
-	print(map.locations.size())
+	map.alterLinks()
+	map.placeEvents()
+	
+	map.finalizeLocations()

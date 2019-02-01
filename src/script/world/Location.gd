@@ -10,6 +10,8 @@ var preparedPoly = false
 var drawDebugPoints = false
 var debugPoints = []
 
+var id = "unidentified"
+
 export (PackedScene) var eventPopupScene
 
 onready var visual = get_node("Visual")
@@ -27,7 +29,7 @@ func _ready():
 
 const white = Color("#FFFFFF")
 func _draw():
-	print("Eventtype %s" % event.eventType)
+	#print("Eventtype %s" % event.eventType)
 	if event.eventType != "wilderness" and visited:
 		draw_circle(Vector2(0,0),20,white)
 		draw_circle(Vector2(0,0),16,$Visual.color)
@@ -35,6 +37,11 @@ func _draw():
 	if drawDebugPoints:
 		for n in debugPoints:
 			draw_circle(n, 20, $Visual.color)
+
+func updateAll():
+	update()
+	for c in get_children():
+		c.update()
 
 func setupPolygon():
 	var lines = []
@@ -147,6 +154,12 @@ func link(other):
 	if !directLinkedNodes.has(other):
 		directLinkedNodes.append(other)
 		other.directLinkedNodes.append(self)
+		
+func softlink(other):
+	#print(directLinkedNodes.size())
+	if !softLinkedNodes.has(other):
+		softLinkedNodes.append(other)
+		other.softLinkedNodes.append(self)
 
 func unlink(other):
 	if directLinkedNodes.has(other):
@@ -172,3 +185,7 @@ func setLocationEvent(e):
 	event = e
 	$Visual.color = e.eventColor
 	#$Visual.color = Color(randf(),randf(),randf())
+
+func setColor(c):
+	$Visual.color = c
+	
